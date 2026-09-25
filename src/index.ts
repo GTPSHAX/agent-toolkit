@@ -27,6 +27,17 @@ export {createConfig, defaultConfig} from './core/config.js';
 export {ToolkitError} from './core/errors.js';
 export {createLogger, type Logger, type LogSink} from './core/logger.js';
 export {
+  DEFAULT_PROTOCOL_VERSION,
+  SERVER_NAME,
+  SUPPORTED_PROTOCOL_VERSIONS,
+  createMcpServer,
+  runMcpServer,
+  type McpMessage,
+  type McpResponse,
+  type McpServer,
+  type McpServerOptions,
+} from './mcp.js';
+export {
   BASE64_TOOL_NAME,
   BINARY_TOOL_NAME,
   DEFAULT_HASH_ALGORITHM,

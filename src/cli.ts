@@ -6,6 +6,7 @@
 import {createConfig} from './core/config.js';
 import {createLogger} from './core/logger.js';
 import {defaultTools} from './index.js';
+import {runMcpServer} from './mcp.js';
 import {createRegistry, executeTool, listTools} from './tools/index.js';
 import {formatToolSpec, parseArgv} from './utils/index.js';
 import type {ToolInfo} from './types/tools.js';
@@ -17,6 +18,7 @@ Usage
   agent-toolkit list [tool]          List tools, or describe one tool.
   agent-toolkit describe <tool>      Show parameters and an example payload.
   agent-toolkit run <tool> [json]    Run a tool with JSON arguments.
+  agent-toolkit mcp                  Run as a local MCP server over stdio.
   agent-toolkit help [tool]          Show help, or describe one tool.
 
 Options
@@ -27,6 +29,7 @@ Examples
   agent-toolkit list
   agent-toolkit describe hash
   agent-toolkit run hash '{"text":"abc"}'
+  agent-toolkit mcp
 `;
 
 /** Exit code returned when usage is invalid. */
@@ -66,6 +69,8 @@ export async function run(argv: readonly string[]): Promise<number> {
       return describeOrList(tools, subject);
     case 'describe':
       return describeTool(tools, subject, logger);
+    case 'mcp':
+      return runMcp();
     case 'run': {
       const [name, rawArgs] = parsed.positional;
       if (!name) {
@@ -82,6 +87,18 @@ export async function run(argv: readonly string[]): Promise<number> {
       process.stdout.write(HELP_TEXT);
       return EXIT_USAGE;
   }
+}
+
+/**
+ * @brief Runs the MCP stdio server until input ends.
+ *
+ * The server writes only MCP messages to stdout, so nothing is logged here.
+ *
+ * @return Process exit code.
+ */
+async function runMcp(): Promise<number> {
+  await runMcpServer();
+  return 0;
 }
 
 /**

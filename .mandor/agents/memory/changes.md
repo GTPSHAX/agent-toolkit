@@ -18,3 +18,6 @@
   Record: `record-changes/2026-09-25-web-tools.md`. Merged via PR #6.
 - 2026-09-25 — Add CLI `describe` and per-tool help (branch
   `feat/cli-tool-describe`). Record: `record-changes/2026-09-25-cli-tool-describe.md`.
+  Merged via PR #7.
+- 2026-09-25 — Add MCP stdio server and `mcp` subcommand (branch `feat/mcp-stdio`).
+  Record: `record-changes/2026-09-25-mcp-stdio.md`.
