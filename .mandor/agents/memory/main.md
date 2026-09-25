@@ -2,8 +2,8 @@
 
 ## Status (2026-09-25)
 Project jalan. `main` memuat scaffold + `text.stats` + `json.format` + `hash`
-(PR #1-#3). Delapan tool encoding dikerjakan di branch `feat/encoding-tools`
-(belum di-merge).
++ 8 tool encoding (PR #1-#4). Tool `uuid` dikerjakan di branch `feat/uuid-tool`
+(belum di-merge). 13 tool terdaftar di `defaultTools`.
 
 ## Stack
 - Bahasa: TypeScript `^6.0.3` (strict, `module: nodenext`, `target: esnext`, ESM `"type": "module"`)
@@ -14,19 +14,19 @@ Project jalan. `main` memuat scaffold + `text.stats` + `json.format` + `hash`
 ## Struktur aktual
 - `src/index.ts` — entry library (re-export + `defaultTools()`)
 - `src/cli.ts` — entry CLI (bin `agent-toolkit`), `-h`/`list`/`run`
-- `src/types/*.d.ts` — tipe publik terpusat (common, config, encoding, hash, json, text, tools, index)
+- `src/types/*.d.ts` — tipe publik terpusat (common, config, encoding, hash, json, text, tools, uuid, index)
 - `src/core/` — `config.ts`, `logger.ts`, `errors.ts`
-- `src/tools/` — `registry.ts`, `executor.ts` (`echo`), `args.ts`, `text-stats.ts` (`text.stats`), `json-format.ts` (`json.format`), `hash.ts` (`hash`), `base64.ts` (`base64`), `hex-binary.ts` (`hex`, `binary`), `url-html.ts` (`url`, `html`), `rot13-morse.ts` (`rot13`, `morse`), `jwt.ts` (`jwt`), `index.ts`
-- `src/utils/` — `text.ts`, `text-stats.ts`, `json.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `index.ts`
-- `tests/` — `text`, `tools`, `text-stats`, `json-format`, `hash`, `base64`, `hex-binary`, `url-html`, `rot13-morse`, `jwt` (vitest, 94 test)
+- `src/tools/` — `registry.ts`, `executor.ts` (`echo`), `args.ts`, `text-stats.ts` (`text.stats`), `json-format.ts` (`json.format`), `hash.ts` (`hash`), `base64.ts` (`base64`), `hex-binary.ts` (`hex`, `binary`), `url-html.ts` (`url`, `html`), `rot13-morse.ts` (`rot13`, `morse`), `jwt.ts` (`jwt`), `uuid.ts` (`uuid`), `index.ts`
+- `src/utils/` — `text.ts`, `text-stats.ts`, `json.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `uuid.ts`, `index.ts`
+- `tests/` — `text`, `tools`, `text-stats`, `json-format`, `hash`, `base64`, `hex-binary`, `url-html`, `rot13-morse`, `jwt`, `uuid` (vitest, 104 test)
 - `scripts/copy-types.mjs` — copy `src/types` → `dist/types`
 - `dist/` — output build (di-gitignore)
 
 ## Git
 - Remote `origin`: https://github.com/GTPSHAX/agent-toolkit.git (private)
-- `main` memuat `text.stats` (PR #1), `json.format` (PR #2), `hash` (PR #3).
-- Branch `feat/encoding-tools`: base64, hex, binary, url, html, rot13, morse, jwt (belum di-merge).
-- Tool terdaftar di `defaultTools`: 12.
+- `main` memuat `text.stats` (PR #1), `json.format` (PR #2), `hash` (PR #3), 8 tool encoding (PR #4).
+- Branch `feat/uuid-tool` berisi `uuid` (belum di-merge).
+- Tool terdaftar di `defaultTools`: 13.
 
 ## Config
 - `tsconfig.json` — dev/typecheck (`noEmit: true`, include `src`+`tests`)

@@ -11,6 +11,7 @@ import {jwtTool} from './tools/jwt.js';
 import {morseTool, rot13Tool} from './tools/rot13-morse.js';
 import {textStatsTool} from './tools/text-stats.js';
 import {htmlTool, urlTool} from './tools/url-html.js';
+import {uuidTool} from './tools/uuid.js';
 import type {ToolDefinition} from './types/tools.js';
 
 export {createConfig, defaultConfig} from './core/config.js';
@@ -20,12 +21,15 @@ export {
   BASE64_TOOL_NAME,
   BINARY_TOOL_NAME,
   DEFAULT_HASH_ALGORITHM,
+  DEFAULT_UUID_COUNT,
   HEX_TOOL_NAME,
   HTML_TOOL_NAME,
   JWT_TOOL_NAME,
+  MAX_UUID_COUNT,
   MORSE_TOOL_NAME,
   ROT13_TOOL_NAME,
   URL_TOOL_NAME,
+  UUID_TOOL_NAME,
   base64Tool,
   binaryTool,
   createRegistry,
@@ -44,6 +48,7 @@ export {
   success,
   textStatsTool,
   urlTool,
+  uuidTool,
   type ToolRegistry,
 } from './tools/index.js';
 export {
@@ -58,6 +63,7 @@ export {
   decodeJwt,
   DEFAULT_INDENT,
   formatJson,
+  generateUuid,
   HASH_ALGORITHMS,
   hashText,
   hexDecode,
@@ -66,9 +72,11 @@ export {
   htmlEncode,
   isHashAlgorithm,
   MAX_INDENT,
+  MAX_UUID,
   MORSE_WORD_SEPARATOR,
   morseDecode,
   morseEncode,
+  NIL_UUID,
   parseArgv,
   PROTON_HASH_ALGORITHMS,
   PROTON_HASH_SEED,
@@ -80,6 +88,7 @@ export {
   truncate,
   urlDecode,
   urlEncode,
+  validateUuid,
   type JsonFormatResult,
   type ParsedArgv,
 } from './utils/index.js';
@@ -106,6 +115,9 @@ export type {
   ToolHandler,
   ToolInfo,
   ToolOutput,
+  UuidString,
+  UuidValidation,
+  UuidVersion,
 } from './types/index.js';
 
 /**
@@ -127,5 +139,6 @@ export function defaultTools(): ToolDefinition[] {
     rot13Tool(),
     morseTool(),
     jwtTool(),
+    uuidTool(),
   ];
 }
