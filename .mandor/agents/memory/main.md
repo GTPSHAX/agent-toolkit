@@ -1,8 +1,8 @@
 # main.md — agent-toolkit
 
 ## Status (2026-09-25)
-Project jalan. Branch `main` berisi commit awal scaffold. Tool pertama
-`text.stats` dikerjakan di branch `feat/text-stats-tool` (belum di-merge).
+Project jalan. `main` memuat scaffold + `text.stats` (PR #1 merged). Tool
+`json.format` dikerjakan di branch `feat/json-format-tool` (belum di-merge).
 
 ## Stack
 - Bahasa: TypeScript `^6.0.3` (strict, `module: nodenext`, `target: esnext`, ESM `"type": "module"`)
@@ -13,18 +13,18 @@ Project jalan. Branch `main` berisi commit awal scaffold. Tool pertama
 ## Struktur aktual
 - `src/index.ts` — entry library (re-export + `defaultTools()`)
 - `src/cli.ts` — entry CLI (bin `agent-toolkit`), `-h`/`list`/`run`
-- `src/types/*.d.ts` — tipe publik terpusat (common, config, tools, text, index)
+- `src/types/*.d.ts` — tipe publik terpusat (common, config, json, text, tools, index)
 - `src/core/` — `config.ts`, `logger.ts`, `errors.ts`
-- `src/tools/` — `registry.ts`, `executor.ts` (tool `echo`), `text-stats.ts` (tool `text.stats`), `index.ts`
-- `src/utils/` — `text.ts` (`parseArgv`, `truncate`, `center`, dll), `text-stats.ts` (`computeTextStats`), `index.ts`
-- `tests/` — `text.test.ts`, `tools.test.ts`, `text-stats.test.ts` (vitest, 25 test)
+- `src/tools/` — `registry.ts`, `executor.ts` (tool `echo`), `text-stats.ts` (tool `text.stats`), `json-format.ts` (tool `json.format`), `index.ts`
+- `src/utils/` — `text.ts` (`parseArgv`, `truncate`, `center`), `text-stats.ts` (`computeTextStats`), `json.ts` (`formatJson`), `index.ts`
+- `tests/` — `text.test.ts`, `tools.test.ts`, `text-stats.test.ts`, `json-format.test.ts` (vitest, 34 test)
 - `scripts/copy-types.mjs` — copy `src/types` → `dist/types`
 - `dist/` — output build (di-gitignore)
 
 ## Git
 - Remote `origin`: https://github.com/GTPSHAX/agent-toolkit.git (private)
-- `main` dan `feat/text-stats-tool` ter-push; branch fitur belum di-merge.
-- Branch `feat/text-stats-tool` berisi `feat: add text.stats tool`.
+- `main` memuat `text.stats` (PR #1 merged, `adf0896`).
+- Branch `feat/json-format-tool` berisi `feat: add json.format tool` (belum di-merge).
 
 ## Config
 - `tsconfig.json` — dev/typecheck (`noEmit: true`, include `src`+`tests`)
@@ -32,6 +32,8 @@ Project jalan. Branch `main` berisi commit awal scaffold. Tool pertama
 - `eslint.config.mjs` — extends `gts`, ignores `dist/`
 - `.prettierrc.cjs` — `...require('gts/.prettierrc.json')`
 - `.gitignore` — `node_modules/`, `dist/`
+- `.gitattributes` — `* text=auto eol=lf` (jaga EOL LF di checkout; dengan
+  `core.autocrlf=true` tanpa ini, Prettier gagal tiap checkpoint)
 
 ## Perintah
 - `npm run build` — `tsc -p tsconfig.build.json` + copy types

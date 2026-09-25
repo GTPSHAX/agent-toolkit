@@ -4,6 +4,7 @@
 
 export type {JsonObject, JsonPrimitive, JsonValue} from './common.js';
 export type {LogLevel, ToolkitConfig} from './config.js';
+export type {JsonFormatOptions} from './json.js';
 export type {TextStats} from './text.js';
 export type {
   ContentItem,
