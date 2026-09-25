@@ -1,9 +1,8 @@
 # main.md — agent-toolkit
 
 ## Status (2026-09-25)
-Project jalan. `main` memuat scaffold + text/json/hash + 8 encoding + uuid +
-7 web + CLI describe (PR #1-#7). MCP stdio server dikerjakan di branch
-`feat/mcp-stdio` (belum di-merge). 20 tool terdaftar; dua antarmuka: CLI dan MCP.
+Project jalan. `main` memuat semua fitur (PR #1-#8): 20 tool, CLI, dan MCP
+stdio server. README dikerjakan di branch `docs/readme` (belum di-merge).
 
 ## Stack
 - Bahasa: TypeScript `^6.0.3` (strict, `module: nodenext`, `target: esnext`, ESM `"type": "module"`)
@@ -19,16 +18,14 @@ Project jalan. `main` memuat scaffold + text/json/hash + 8 encoding + uuid +
 - `src/core/` — `config.ts`, `logger.ts`, `errors.ts`
 - `src/tools/` — `registry.ts`, `executor.ts` (`echo`), `args.ts`, `text-stats.ts`, `json-format.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `uuid.ts`, `web.ts` (7 tool `web.*`), `index.ts`
 - `src/utils/` — `text.ts`, `text-stats.ts`, `json.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `uuid.ts`, `web-core.ts`, `web-engines.ts`, `web-fetch.ts`, `web-search.ts`, `index.ts`
-- `tests/` — 12 file (vitest, 119 test)
+- `tests/` — 14 file (vitest, 138 test)
 - `scripts/copy-types.mjs` — copy `src/types` → `dist/types`
 - `dist/` — output build (di-gitignore)
-- `scripts/copy-types.mjs` — copy `src/types` → `dist/types`
-- `dist/` — output build (di-gitignore)
+- `README.md` — dokumentasi publik (CLI + MCP, daftar tool, kontrak, dev)
 
 ## Git
 - Remote `origin`: https://github.com/GTPSHAX/agent-toolkit.git (private)
-- `main` memuat text/json/hash (PR #1-#3), 8 encoding (PR #4), uuid (PR #5), 7 web (PR #6).
-- Branch `feat/cli-tool-describe`: CLI `describe` + per-tool help (belum di-merge).
+- `main` memuat semua fitur (PR #1-#8): 20 tool, CLI, MCP stdio.
 - Tool terdaftar di `defaultTools`: 20.
 - Web: default engine `google` via headless Chrome/Edge (tanpa API key);
   `google-api` opsional (butuh `GOOGLE_API_KEY` + `GOOGLE_CX`).

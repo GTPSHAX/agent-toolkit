@@ -20,4 +20,5 @@
   `feat/cli-tool-describe`). Record: `record-changes/2026-09-25-cli-tool-describe.md`.
   Merged via PR #7.
 - 2026-09-25 — Add MCP stdio server and `mcp` subcommand (branch `feat/mcp-stdio`).
-  Record: `record-changes/2026-09-25-mcp-stdio.md`.
+  Record: `record-changes/2026-09-25-mcp-stdio.md`. Merged via PR #8.
+- 2026-09-25 — Add project README (branch `docs/readme`).
