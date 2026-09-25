@@ -10,3 +10,4 @@ export {
   truncate,
   type ParsedArgv,
 } from './text.js';
+export {computeTextStats} from './text-stats.js';
