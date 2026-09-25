@@ -21,6 +21,11 @@ Project jalan. Branch `main` berisi commit awal scaffold. Tool pertama
 - `scripts/copy-types.mjs` — copy `src/types` → `dist/types`
 - `dist/` — output build (di-gitignore)
 
+## Git
+- Remote `origin`: https://github.com/GTPSHAX/agent-toolkit.git (private)
+- `main` dan `feat/text-stats-tool` ter-push; branch fitur belum di-merge.
+- Branch `feat/text-stats-tool` berisi `feat: add text.stats tool`.
+
 ## Config
 - `tsconfig.json` — dev/typecheck (`noEmit: true`, include `src`+`tests`)
 - `tsconfig.build.json` — build (`rootDir: src`, `outDir: dist`, declaration on)
