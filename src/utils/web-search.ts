@@ -333,7 +333,8 @@ export async function verifyFreshness(
           ...result,
           freshnessVerified: false,
           pageDateCandidates: [],
-          freshnessError: cause instanceof Error ? cause.message : String(cause),
+          freshnessError:
+            cause instanceof Error ? cause.message : String(cause),
           fetchedAt: new Date().toISOString(),
         };
       }
