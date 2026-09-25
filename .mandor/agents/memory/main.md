@@ -1,8 +1,8 @@
 # main.md — agent-toolkit
 
 ## Status (2026-09-25)
-Project ter-inisialisasi dan jalan. Branch `main` berisi commit awal
-`chore: scaffold agent-toolkit package`. `.opencode/` untracked.
+Project jalan. Branch `main` berisi commit awal scaffold. Tool pertama
+`text.stats` dikerjakan di branch `feat/text-stats-tool` (belum di-merge).
 
 ## Stack
 - Bahasa: TypeScript `^6.0.3` (strict, `module: nodenext`, `target: esnext`, ESM `"type": "module"`)
@@ -13,11 +13,11 @@ Project ter-inisialisasi dan jalan. Branch `main` berisi commit awal
 ## Struktur aktual
 - `src/index.ts` — entry library (re-export + `defaultTools()`)
 - `src/cli.ts` — entry CLI (bin `agent-toolkit`), `-h`/`list`/`run`
-- `src/types/*.d.ts` — tipe publik terpusat (common, config, tools, index)
+- `src/types/*.d.ts` — tipe publik terpusat (common, config, tools, text, index)
 - `src/core/` — `config.ts`, `logger.ts`, `errors.ts`
-- `src/tools/` — `registry.ts`, `executor.ts` (tool `echo`), `index.ts`
-- `src/utils/` — `text.ts` (`parseArgv`, `truncate`, `center`, dll), `index.ts`
-- `tests/` — `text.test.ts`, `tools.test.ts` (vitest, 15 test)
+- `src/tools/` — `registry.ts`, `executor.ts` (tool `echo`), `text-stats.ts` (tool `text.stats`), `index.ts`
+- `src/utils/` — `text.ts` (`parseArgv`, `truncate`, `center`, dll), `text-stats.ts` (`computeTextStats`), `index.ts`
+- `tests/` — `text.test.ts`, `tools.test.ts`, `text-stats.test.ts` (vitest, 25 test)
 - `scripts/copy-types.mjs` — copy `src/types` → `dist/types`
 - `dist/` — output build (di-gitignore)
 
