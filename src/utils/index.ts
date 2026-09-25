@@ -29,3 +29,9 @@ export {
   protonHash64,
 } from './hash.js';
 export {base64Decode, base64Encode} from './base64.js';
+export {
+  binaryDecode,
+  binaryEncode,
+  hexDecode,
+  hexEncode,
+} from './hex-binary.js';
