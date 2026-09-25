@@ -3,6 +3,7 @@
  */
 
 import {echoTool} from './tools/executor.js';
+import {hashTool} from './tools/hash.js';
 import {jsonFormatTool} from './tools/json-format.js';
 import {textStatsTool} from './tools/text-stats.js';
 import type {ToolDefinition} from './types/tools.js';
@@ -12,10 +13,12 @@ export {ToolkitError} from './core/errors.js';
 export {createLogger, type Logger, type LogSink} from './core/logger.js';
 export {
   createRegistry,
+  DEFAULT_HASH_ALGORITHM,
   echoTool,
   executeTool,
   failure,
   getTool,
+  hashTool,
   jsonFormatTool,
   listTools,
   success,
@@ -25,10 +28,19 @@ export {
 export {
   center,
   computeTextStats,
+  CRYPTO_HASH_ALGORITHMS,
+  cryptoHash,
   DEFAULT_INDENT,
   formatJson,
+  HASH_ALGORITHMS,
+  hashText,
+  isHashAlgorithm,
   MAX_INDENT,
   parseArgv,
+  PROTON_HASH_ALGORITHMS,
+  PROTON_HASH_SEED,
+  protonHash,
+  protonHash64,
   quote,
   repeatChar,
   truncate,
@@ -37,13 +49,16 @@ export {
 } from './utils/index.js';
 export type {
   ContentItem,
+  CryptoHashAlgorithm,
   ExecuteOptions,
+  HashAlgorithm,
   JsonFormatOptions,
   JsonObject,
   JsonPrimitive,
   JsonSchema,
   JsonValue,
   LogLevel,
+  ProtonHashAlgorithm,
   TextContent,
   TextStats,
   ToolkitConfig,
@@ -60,5 +75,5 @@ export type {
  * @return A fresh list of tool definitions.
  */
 export function defaultTools(): ToolDefinition[] {
-  return [echoTool(), textStatsTool(), jsonFormatTool()];
+  return [echoTool(), textStatsTool(), jsonFormatTool(), hashTool()];
 }

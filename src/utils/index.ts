@@ -17,3 +17,14 @@ export {
   MAX_INDENT,
   type JsonFormatResult,
 } from './json.js';
+export {
+  CRYPTO_HASH_ALGORITHMS,
+  cryptoHash,
+  HASH_ALGORITHMS,
+  hashText,
+  isHashAlgorithm,
+  PROTON_HASH_ALGORITHMS,
+  PROTON_HASH_SEED,
+  protonHash,
+  protonHash64,
+} from './hash.js';
