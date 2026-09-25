@@ -1,0 +1,27 @@
+# Rules — agent-toolkit
+
+- Code, comments, and identifiers must be written in English.
+- Conversation with the user must be in Bahasa Indonesia (code snippets stay in English).
+- Keep the toolkit zero-dependency (no runtime dependencies) unless the user explicitly approves otherwise.
+- All code comments must use Doxygen Javadoc style. Details:
+  - Block format: C-style comment opening with two asterisks (`/** ... */`); leading `*` per line optional.
+  - Structure: brief description first (one line, via `@brief` or first sentence), blank line, then detailed description.
+  - Function/method docs must include `@param <name>` per parameter and `@return` for the return value; use `@see` for cross-references.
+  - Document members where declared (header/`.d.ts` style placement: brief at declaration); implementation files (`.ts`) carry the detailed description.
+  - Reference: Doxygen manual `docblocks.html` (` brief + detailed + in-body` anatomy, `\`/`@` command equivalence).
+- When answering technical questions (standards, formats, best practices), the agent must first seek references using `D:\workspace\testing\web-search.js` with engine `google` as the default engine and base the answer on fetched sources with citations, rather than personal assumptions. State clearly when no source was found.
+- Code (in any form) is written for the agent itself, not for the user or other people. Write it as working material the agent will use.
+- Do not add explanations of why a change or new decision was made — no rationale comments, no "why we chose this" prose. Keep the code and its docs factual.
+- Commit messages follow Conventional Commits 1.0.0 and cbeams' seven rules. Details:
+  - Structure: `<type>[(scope)][!]: <description>`, then optional body, then optional footer(s); blank line between each section.
+  - Types: `feat` (new feature), `fix` (bug fix), `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`.
+  - Breaking change: `!` before `:` in the type/scope, or `BREAKING CHANGE: <description>` footer (uppercase token).
+  - Subject: imperative mood, capitalized, no trailing period, 50 characters (72 hard limit).
+  - Body: blank line after subject, wrap at 72 characters, explain what and why (not how).
+  - Footers / issue references at the bottom, e.g. `Refs: #123`, `Resolves: #123`.
+  - References: conventionalcommits.org/en/v1.0.0/ and cbea.ms/git-commit/.
+- Every implementation starts on a new branch. Details:
+  - Create a fresh branch per implementation; never commit implementation work directly to `main`.
+  - The user owns merges; the agent must not merge, rebase onto, or force-push branches.
+  - Base each new branch on `main`. If a previous branch has not been merged yet, do not continue it — start from `main` again.
+  - If `main` has no commit yet, stop and tell the user before branching.
