@@ -25,4 +25,5 @@ export {
   binaryTool,
   hexTool,
 } from './hex-binary.js';
+export {HTML_TOOL_NAME, URL_TOOL_NAME, htmlTool, urlTool} from './url-html.js';
 export {isArgsObject, readBoolean, readMode, readString} from './args.js';

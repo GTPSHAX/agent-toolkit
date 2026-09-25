@@ -35,3 +35,4 @@ export {
   hexDecode,
   hexEncode,
 } from './hex-binary.js';
+export {htmlDecode, htmlEncode, urlDecode, urlEncode} from './url-html.js';
