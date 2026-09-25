@@ -9,14 +9,7 @@ export type CodecMode = 'encode' | 'decode';
 
 /** The supported encoding families exposed as tools. */
 export type EncodingFormat =
-  | 'base64'
-  | 'url'
-  | 'html'
-  | 'hex'
-  | 'binary'
-  | 'rot13'
-  | 'morse'
-  | 'jwt';
+  'base64' | 'url' | 'html' | 'hex' | 'binary' | 'rot13' | 'morse' | 'jwt';
 
 /** Decoded parts of a JSON Web Token, without signature verification. */
 export interface JwtParts extends Record<string, JsonValue> {
