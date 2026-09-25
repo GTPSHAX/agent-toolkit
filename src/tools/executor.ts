@@ -58,7 +58,23 @@ export function echoTool(): ToolDefinition {
     name: ECHO_TOOL_NAME,
     title: 'Echo',
     description: 'Returns the provided arguments unchanged.',
-    inputSchema: {type: 'object'},
+    inputSchema: {
+      type: 'object',
+      properties: {
+        value: {
+          type: 'string',
+          description: 'Any value to echo back as JSON text.',
+        },
+      },
+      required: ['value'],
+    },
+    outputSchema: {
+      type: 'object',
+      properties: {
+        value: {type: 'string'},
+      },
+      required: ['value'],
+    },
     handler: echoHandler,
   };
 }
