@@ -39,4 +39,21 @@ export {
   UUID_TOOL_NAME,
   uuidTool,
 } from './uuid.js';
+export {
+  MAX_RESULTS,
+  WEB_BATCH_TOOL_NAME,
+  WEB_FETCH_TOOL_NAME,
+  WEB_RESEARCH_TOOL_NAME,
+  WEB_SEARCH_TOOL_NAME,
+  WEB_SUGGEST_TOOL_NAME,
+  WEB_SUMMARY_TOOL_NAME,
+  WEB_VERIFY_TOOL_NAME,
+  webBatchTool,
+  webFetchTool,
+  webResearchTool,
+  webSearchTool,
+  webSuggestTool,
+  webSummaryTool,
+  webVerifyTool,
+} from './web.js';
 export {isArgsObject, readBoolean, readMode, readString} from './args.js';

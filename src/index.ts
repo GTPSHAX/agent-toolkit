@@ -12,6 +12,15 @@ import {morseTool, rot13Tool} from './tools/rot13-morse.js';
 import {textStatsTool} from './tools/text-stats.js';
 import {htmlTool, urlTool} from './tools/url-html.js';
 import {uuidTool} from './tools/uuid.js';
+import {
+  webBatchTool,
+  webFetchTool,
+  webResearchTool,
+  webSearchTool,
+  webSuggestTool,
+  webSummaryTool,
+  webVerifyTool,
+} from './tools/web.js';
 import type {ToolDefinition} from './types/tools.js';
 
 export {createConfig, defaultConfig} from './core/config.js';
@@ -30,6 +39,13 @@ export {
   ROT13_TOOL_NAME,
   URL_TOOL_NAME,
   UUID_TOOL_NAME,
+  WEB_BATCH_TOOL_NAME,
+  WEB_FETCH_TOOL_NAME,
+  WEB_RESEARCH_TOOL_NAME,
+  WEB_SEARCH_TOOL_NAME,
+  WEB_SUGGEST_TOOL_NAME,
+  WEB_SUMMARY_TOOL_NAME,
+  WEB_VERIFY_TOOL_NAME,
   base64Tool,
   binaryTool,
   createRegistry,
@@ -49,6 +65,13 @@ export {
   textStatsTool,
   urlTool,
   uuidTool,
+  webBatchTool,
+  webFetchTool,
+  webResearchTool,
+  webSearchTool,
+  webSuggestTool,
+  webSummaryTool,
+  webVerifyTool,
   type ToolRegistry,
 } from './tools/index.js';
 export {
@@ -107,6 +130,7 @@ export type {
   JwtParts,
   LogLevel,
   ProtonHashAlgorithm,
+  SearchResult,
   TextContent,
   TextStats,
   ToolkitConfig,
@@ -140,5 +164,12 @@ export function defaultTools(): ToolDefinition[] {
     morseTool(),
     jwtTool(),
     uuidTool(),
+    webSearchTool(),
+    webFetchTool(),
+    webSuggestTool(),
+    webSummaryTool(),
+    webBatchTool(),
+    webVerifyTool(),
+    webResearchTool(),
   ];
 }
