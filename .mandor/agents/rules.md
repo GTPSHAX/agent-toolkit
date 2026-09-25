@@ -25,3 +25,7 @@
   - The user owns merges; the agent must not merge, rebase onto, or force-push branches.
   - Base each new branch on `main`. If a previous branch has not been merged yet, do not continue it — start from `main` again.
   - If `main` has no commit yet, stop and tell the user before branching.
+- Commit progress step by step, not all at once. Details:
+  - Commit each meaningful unit of progress separately as it is completed.
+  - Do not bundle unrelated changes or the entire task into a single commit.
+  - Keep each commit atomic and scoped to one concern.
