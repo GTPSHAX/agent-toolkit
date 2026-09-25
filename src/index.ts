@@ -3,6 +3,7 @@
  */
 
 import {echoTool} from './tools/executor.js';
+import {textStatsTool} from './tools/text-stats.js';
 import type {ToolDefinition} from './types/tools.js';
 
 export {createConfig, defaultConfig} from './core/config.js';
@@ -16,10 +17,12 @@ export {
   getTool,
   listTools,
   success,
+  textStatsTool,
   type ToolRegistry,
 } from './tools/index.js';
 export {
   center,
+  computeTextStats,
   parseArgv,
   quote,
   repeatChar,
@@ -35,6 +38,7 @@ export type {
   JsonValue,
   LogLevel,
   TextContent,
+  TextStats,
   ToolkitConfig,
   ToolContext,
   ToolDefinition,
@@ -49,5 +53,5 @@ export type {
  * @return A fresh list of tool definitions.
  */
 export function defaultTools(): ToolDefinition[] {
-  return [echoTool()];
+  return [echoTool(), textStatsTool()];
 }

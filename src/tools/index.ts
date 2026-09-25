@@ -15,3 +15,4 @@ export {
   failure,
   success,
 } from './executor.js';
+export {TEXT_STATS_TOOL_NAME, textStatsTool} from './text-stats.js';
