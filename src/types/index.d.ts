@@ -13,6 +13,11 @@ export type {
 export type {JsonFormatOptions} from './json.js';
 export type {TextStats} from './text.js';
 export type {
+  UuidString,
+  UuidValidation,
+  UuidVersion,
+} from './uuid.js';
+export type {
   ContentItem,
   ExecuteOptions,
   ImageContent,
