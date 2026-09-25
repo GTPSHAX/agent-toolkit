@@ -5,6 +5,11 @@
 export type {JsonObject, JsonPrimitive, JsonValue} from './common.js';
 export type {LogLevel, ToolkitConfig} from './config.js';
 export type {
+  CodecMode,
+  EncodingFormat,
+  JwtParts,
+} from './encoding.js';
+export type {
   CryptoHashAlgorithm,
   HashAlgorithm,
   ProtonHashAlgorithm,
