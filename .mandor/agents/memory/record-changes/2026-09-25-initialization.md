@@ -31,7 +31,10 @@ Initial scaffold of the `agent-toolkit` package from a greenfield repo.
 - `npm run lint` → clean.
 - `node dist/cli.js -h` / `list` / `run echo '{"a":1}'` → exit 0.
 
+## Git
+- Branch `main` created with commit `chore: scaffold agent-toolkit package`.
+- `.opencode/` left untracked.
+
 ## Not done
-- No git commit yet.
 - `docs/` and `examples/` still empty.
 - Additional tools beyond `echo` not implemented.

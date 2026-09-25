@@ -1,7 +1,8 @@
 # main.md — agent-toolkit
 
 ## Status (2026-09-25)
-Project ter-inisialisasi dan jalan. Belum ada commit git.
+Project ter-inisialisasi dan jalan. Branch `main` berisi commit awal
+`chore: scaffold agent-toolkit package`. `.opencode/` untracked.
 
 ## Stack
 - Bahasa: TypeScript `^6.0.3` (strict, `module: nodenext`, `target: esnext`, ESM `"type": "module"`)
