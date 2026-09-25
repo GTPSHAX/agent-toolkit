@@ -10,6 +10,7 @@ import type {
   SearchTab,
 } from '../types/web.js';
 import type {ToolDefinition, ToolOutput} from '../types/tools.js';
+import type {JsonSchema} from '../types/tools.js';
 import {crawlSitemap, fetchDocument} from '../utils/web-fetch.js';
 import {
   isFreshnessWindow,
@@ -45,6 +46,26 @@ export const WEB_RESEARCH_TOOL_NAME = 'web.research';
 
 /** Upper bound on results per request. */
 export const MAX_RESULTS = 100;
+
+/** Output schema shared by every result-producing web tool. */
+const SEARCH_RESULT_SCHEMA: JsonSchema = {
+  type: 'object',
+  properties: {
+    title: {type: 'string'},
+    url: {type: 'string'},
+    snippet: {type: 'string'},
+    source: {type: 'string'},
+    age: {type: 'string'},
+    publishedAt: {type: 'string'},
+    thumbnail: {type: 'string'},
+    canonicalUrl: {type: 'string'},
+    duplicate: {type: 'boolean'},
+    rank: {type: 'number'},
+    score: {type: 'number'},
+    sourceEngine: {type: 'string'},
+  },
+  required: ['title', 'url'],
+};
 
 /**
  * @brief Creates the `web.search` tool.
@@ -86,6 +107,14 @@ export function webSearchTool(): ToolDefinition {
       },
       required: ['query'],
     },
+    outputSchema: {
+      type: 'object',
+      properties: {
+        query: {type: 'string'},
+        results: {type: 'array', items: SEARCH_RESULT_SCHEMA},
+      },
+      required: ['query', 'results'],
+    },
     handler: handleWebSearch,
   };
 }
@@ -113,6 +142,22 @@ export function webFetchTool(): ToolDefinition {
       },
       required: ['url'],
     },
+    outputSchema: {
+      type: 'object',
+      properties: {
+        url: {type: 'string'},
+        status: {type: 'number'},
+        title: {type: 'string'},
+        text: {type: 'string'},
+        contentType: {type: 'string'},
+        bytes: {type: 'number'},
+        sitemap: {type: 'string'},
+        urls: {type: 'array', items: {type: 'string'}},
+        count: {type: 'number'},
+        fetchedAt: {type: 'string'},
+      },
+      required: ['url'],
+    },
     handler: handleWebFetch,
   };
 }
@@ -129,8 +174,16 @@ export function webSuggestTool(): ToolDefinition {
     description: 'Returns Google autocomplete suggestions; no API key.',
     inputSchema: {
       type: 'object',
-      properties: {query: {type: 'string'}},
+      properties: {query: {type: 'string', description: 'Partial query.'}},
       required: ['query'],
+    },
+    outputSchema: {
+      type: 'object',
+      properties: {
+        query: {type: 'string'},
+        suggestions: {type: 'array', items: {type: 'string'}},
+      },
+      required: ['query', 'suggestions'],
     },
     handler: handleWebSuggest,
   };
@@ -157,6 +210,26 @@ export function webSummaryTool(): ToolDefinition {
       },
       required: ['query'],
     },
+    outputSchema: {
+      type: 'object',
+      properties: {
+        query: {type: 'string'},
+        items: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              title: {type: 'string'},
+              url: {type: 'string'},
+              excerpt: {type: 'string'},
+              error: {type: 'string'},
+            },
+            required: ['title', 'url', 'excerpt'],
+          },
+        },
+      },
+      required: ['query', 'items'],
+    },
     handler: handleWebSummary,
   };
 }
@@ -179,6 +252,18 @@ export function webBatchTool(): ToolDefinition {
         limit: {type: 'number'},
       },
       required: ['queries'],
+    },
+    outputSchema: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          query: {type: 'string'},
+          results: {type: 'array', items: SEARCH_RESULT_SCHEMA},
+          error: {type: 'string'},
+        },
+        required: ['query'],
+      },
     },
     handler: handleWebBatch,
   };
@@ -207,6 +292,14 @@ export function webVerifyTool(): ToolDefinition {
       },
       required: ['query'],
     },
+    outputSchema: {
+      type: 'object',
+      properties: {
+        query: {type: 'string'},
+        results: {type: 'array', items: SEARCH_RESULT_SCHEMA},
+      },
+      required: ['query', 'results'],
+    },
     handler: handleWebVerify,
   };
 }
@@ -228,6 +321,15 @@ export function webResearchTool(): ToolDefinition {
         query: {type: 'string'},
         note: {type: 'string'},
         urls: {type: 'array'},
+      },
+      required: ['action'],
+    },
+    outputSchema: {
+      type: 'object',
+      properties: {
+        action: {type: 'string'},
+        records: {type: 'array'},
+        record: {type: 'object'},
       },
       required: ['action'],
     },

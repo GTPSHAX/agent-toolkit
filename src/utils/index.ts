@@ -11,6 +11,7 @@ export {
   type ParsedArgv,
 } from './text.js';
 export {computeTextStats} from './text-stats.js';
+export {exampleFromSchema, formatToolSpec} from './tool-spec.js';
 export {
   DEFAULT_INDENT,
   formatJson,
