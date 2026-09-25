@@ -44,3 +44,57 @@ export {
 } from './rot13-morse.js';
 export {decodeJwt} from './jwt.js';
 export {generateUuid, MAX_UUID, NIL_UUID, validateUuid} from './uuid.js';
+export {
+  DEFAULT_CACHE_TTL_MS,
+  DEFAULT_TIMEOUT_MS,
+  USER_AGENT,
+  assertPublicUrl,
+  cacheGet,
+  cacheSet,
+  canonicalUrl,
+  cleanSpaces,
+  decodeEntities,
+  extractTitle,
+  htmlToText,
+  httpGet,
+} from './web-core.js';
+export {
+  DEFAULT_MAX_LENGTH,
+  DEFAULT_MAX_PDF_BYTES,
+  crawlSitemap,
+  extractPdfText,
+  fetchDocument,
+  fetchPage,
+} from './web-fetch.js';
+export {
+  FRESHNESS_MAP,
+  MAX_CONCURRENT_RENDERS,
+  duckDuckGoSearch,
+  findBrowser,
+  googleSearch,
+  googleSearchApi,
+  googleSuggest,
+  isBrowserAvailable,
+  resolveGotoToken,
+  runEngine,
+} from './web-engines.js';
+export {
+  DEFAULT_ENGINE,
+  DEFAULT_ENGINES,
+  DEFAULT_LIMIT,
+  annotateDuplicates,
+  isFreshnessWindow,
+  isSearchEngine,
+  isSearchTab,
+  labelQuality,
+  listResearch,
+  multiSourceSearch,
+  rankResults,
+  researchFile,
+  saveResearch,
+  search,
+  searchBatch,
+  summarize,
+  verifyFreshness,
+  verifySources,
+} from './web-search.js';

@@ -14,6 +14,26 @@ export type {JsonFormatOptions} from './json.js';
 export type {TextStats} from './text.js';
 export type {UuidString, UuidValidation, UuidVersion} from './uuid.js';
 export type {
+  BatchItem,
+  BriefItem,
+  CorroborationGroup,
+  EngineOutcome,
+  FreshnessWindow,
+  MultiSourceResult,
+  PageContent,
+  QualityLabel,
+  ResearchRecord,
+  ScoreSignals,
+  SearchBrief,
+  SearchEngine,
+  SearchOptions,
+  SearchResult,
+  SearchTab,
+  SitemapResult,
+  SourceVerification,
+  VerifiedResult,
+} from './web.js';
+export type {
   ContentItem,
   ExecuteOptions,
   ImageContent,
