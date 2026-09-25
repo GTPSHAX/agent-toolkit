@@ -26,4 +26,10 @@ export {
   hexTool,
 } from './hex-binary.js';
 export {HTML_TOOL_NAME, URL_TOOL_NAME, htmlTool, urlTool} from './url-html.js';
+export {
+  MORSE_TOOL_NAME,
+  ROT13_TOOL_NAME,
+  morseTool,
+  rot13Tool,
+} from './rot13-morse.js';
 export {isArgsObject, readBoolean, readMode, readString} from './args.js';

@@ -36,3 +36,9 @@ export {
   hexEncode,
 } from './hex-binary.js';
 export {htmlDecode, htmlEncode, urlDecode, urlEncode} from './url-html.js';
+export {
+  MORSE_WORD_SEPARATOR,
+  morseDecode,
+  morseEncode,
+  rot13,
+} from './rot13-morse.js';
