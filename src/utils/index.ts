@@ -42,3 +42,4 @@ export {
   morseEncode,
   rot13,
 } from './rot13-morse.js';
+export {decodeJwt} from './jwt.js';
