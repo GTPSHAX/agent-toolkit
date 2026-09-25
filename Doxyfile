@@ -1,0 +1,35 @@
+# Doxygen configuration for the agent-toolkit TypeScript sources.
+#
+# Doxygen has no dedicated TypeScript parser, so TypeScript is mapped to the
+# JavaScript parser and the source is pre-processed by a filter that strips
+# TypeScript-only syntax. See scripts/doxygen-filter.mjs.
+
+PROJECT_NAME           = "agent-toolkit"
+PROJECT_BRIEF          = "Agent-callable tools with MCP-compatible output"
+PROJECT_NUMBER         = 1.0.0
+OUTPUT_DIRECTORY       = docs/api
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+HTML_OUTPUT            = html
+QUIET                  = YES
+WARN_IF_UNDOCUMENTED   = NO
+WARN_IF_DOC_ERROR      = NO
+WARN_LOGFILE           =
+
+INPUT                  = README.md src
+FILE_PATTERNS          = *.ts *.md
+RECURSIVE              = YES
+USE_MDFILE_AS_MAINPAGE = README.md
+
+FILTER_PATTERNS        = *.ts="node scripts/doxygen-filter.mjs"
+EXTENSION_MAPPING      = ts=JavaScript
+OPTIMIZE_OUTPUT_JAVA   = YES
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+HIDE_UNDOC_MEMBERS     = NO
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = NO
+REFERENCED_BY_RELATION = NO
+REFERENCES_RELATION    = YES
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
