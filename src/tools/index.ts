@@ -16,3 +16,4 @@ export {
   success,
 } from './executor.js';
 export {TEXT_STATS_TOOL_NAME, textStatsTool} from './text-stats.js';
+export {JSON_FORMAT_TOOL_NAME, jsonFormatTool} from './json-format.js';

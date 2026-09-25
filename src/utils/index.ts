@@ -11,3 +11,9 @@ export {
   type ParsedArgv,
 } from './text.js';
 export {computeTextStats} from './text-stats.js';
+export {
+  DEFAULT_INDENT,
+  formatJson,
+  MAX_INDENT,
+  type JsonFormatResult,
+} from './json.js';
