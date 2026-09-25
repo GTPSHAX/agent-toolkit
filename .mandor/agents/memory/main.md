@@ -1,9 +1,9 @@
 # main.md — agent-toolkit
 
 ## Status (2026-09-25)
-Project jalan. `main` memuat scaffold + text/json/hash + 8 encoding + uuid
-(PR #1-#5). Tujuh tool web dikerjakan di branch `feat/web-tools` (belum
-di-merge). 20 tool terdaftar di `defaultTools`.
+Project jalan. `main` memuat scaffold + text/json/hash + 8 encoding + uuid +
+7 web (PR #1-#6). CLI `describe` dikerjakan di branch `feat/cli-tool-describe`
+(belum di-merge). 20 tool terdaftar di `defaultTools`.
 
 ## Stack
 - Bahasa: TypeScript `^6.0.3` (strict, `module: nodenext`, `target: esnext`, ESM `"type": "module"`)
@@ -26,8 +26,8 @@ di-merge). 20 tool terdaftar di `defaultTools`.
 
 ## Git
 - Remote `origin`: https://github.com/GTPSHAX/agent-toolkit.git (private)
-- `main` memuat text/json/hash (PR #1-#3), 8 encoding (PR #4), uuid (PR #5).
-- Branch `feat/web-tools`: 7 tool `web.*` (belum di-merge).
+- `main` memuat text/json/hash (PR #1-#3), 8 encoding (PR #4), uuid (PR #5), 7 web (PR #6).
+- Branch `feat/cli-tool-describe`: CLI `describe` + per-tool help (belum di-merge).
 - Tool terdaftar di `defaultTools`: 20.
 - Web: default engine `google` via headless Chrome/Edge (tanpa API key);
   `google-api` opsional (butuh `GOOGLE_API_KEY` + `GOOGLE_CX`).
@@ -46,7 +46,8 @@ di-merge). 20 tool terdaftar di `defaultTools`.
 - `npm test` — `vitest run`
 - `npm run lint` / `npm run fix` — `gts lint` / `gts fix`
 - `npm run clean` — hapus `dist/`
-- CLI: `node dist/cli.js -h`, `... list`, `... run echo '{"a":1}'`
+- CLI: `node dist/cli.js -h`, `... list`, `... list <tool>`, `... describe <tool>`,
+  `... run <tool> '{"json":...}'`
 
 ## Batasan
 - Kontrak output tool = MCP `CallToolResult`: `{content, structuredContent?, isError}`

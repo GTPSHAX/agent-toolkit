@@ -15,4 +15,6 @@
   Record: `record-changes/2026-09-25-uuid-tool.md`. Merged via PR #5.
 - 2026-09-25 — Add web tools: web.search, web.fetch, web.suggest, web.summary,
   web.batch, web.verify, web.research (branch `feat/web-tools`).
-  Record: `record-changes/2026-09-25-web-tools.md`.
+  Record: `record-changes/2026-09-25-web-tools.md`. Merged via PR #6.
+- 2026-09-25 — Add CLI `describe` and per-tool help (branch
+  `feat/cli-tool-describe`). Record: `record-changes/2026-09-25-cli-tool-describe.md`.
