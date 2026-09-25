@@ -12,23 +12,40 @@ const SAMPLE_VALUES: Readonly<Record<string, JsonValue>> = {
   url: 'https://example.com',
   json: '{"a":1}',
   token: 'eyJhbGciOiJIUzI1NiJ9.e30.sig',
-  value: '550e8400-e29b-41d4-a716-446655440000',
-  name: 'echo',
+  mode: 'encode',
+  algorithm: 'sha256',
+  site: 'github.com',
 };
+
+/** Optional parameters worth showing in the example payload. */
+const EXAMPLE_OPTIONAL_KEYS: readonly string[] = [
+  'mode',
+  'algorithm',
+  'limit',
+  'top',
+  'count',
+];
 
 /**
  * @brief Builds an example argument object from a tool's input schema.
  *
+ * Only required properties are included, plus a small set of common optional
+ * properties, each with a realistic sample value.
+ *
  * @param schema Tool input schema.
- * @return Example payload containing every declared property.
+ * @return Example payload.
  */
 export function exampleFromSchema(schema: JsonSchema): JsonValue {
   if (schema.type !== 'object' || !schema.properties) {
     return {};
   }
+  const required = new Set(schema.required ?? []);
   const example: Record<string, JsonValue> = {};
   for (const [key, property] of Object.entries(schema.properties)) {
-    example[key] = exampleValue(key, property);
+    const include = required.has(key) || EXAMPLE_OPTIONAL_KEYS.includes(key);
+    if (include) {
+      example[key] = exampleValue(key, property);
+    }
   }
   return example;
 }
@@ -41,12 +58,16 @@ export function exampleFromSchema(schema: JsonSchema): JsonValue {
  * @return Sample JSON value.
  */
 function exampleValue(key: string, schema: JsonSchema): JsonValue {
+  const sample = SAMPLE_VALUES[key];
+  const matchesEnum =
+    schema.enum === undefined || sample === undefined
+      ? true
+      : schema.enum.includes(sample);
+  if (sample !== undefined && matchesEnum) {
+    return sample;
+  }
   if (schema.enum && schema.enum.length > 0) {
     return schema.enum[0] as JsonValue;
-  }
-  const sample = SAMPLE_VALUES[key];
-  if (sample !== undefined) {
-    return sample;
   }
   return placeholderForType(schema.type);
 }
@@ -61,7 +82,7 @@ function placeholderForType(type: string | undefined): JsonValue {
   switch (type) {
     case 'number':
     case 'integer':
-      return 0;
+      return 5;
     case 'boolean':
       return true;
     case 'array':

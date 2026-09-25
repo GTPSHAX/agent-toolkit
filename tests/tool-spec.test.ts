@@ -27,15 +27,25 @@ function tool(name: string): ToolInfo {
 }
 
 describe('exampleFromSchema', () => {
-  it('fills every declared property', () => {
+  it('includes required properties and common optionals', () => {
     const example = exampleFromSchema(tool('hash').inputSchema) as Record<
       string,
       unknown
     >;
     expect(Object.keys(example).sort()).toEqual(['algorithm', 'text']);
+    expect(example['algorithm']).toBe('sha256');
   });
 
-  it('prefers the first enum value for choices', () => {
+  it('omits unrelated optional properties', () => {
+    const example = exampleFromSchema(tool('web.search').inputSchema) as Record<
+      string,
+      unknown
+    >;
+    expect(Object.keys(example).sort()).toEqual(['limit', 'query']);
+    expect(example['query']).toBe('nodejs release notes');
+  });
+
+  it('prefers the first enum value when the sample does not fit', () => {
     const example = exampleFromSchema(tool('uuid').inputSchema) as Record<
       string,
       unknown
@@ -47,9 +57,14 @@ describe('exampleFromSchema', () => {
     expect(
       exampleFromSchema({
         type: 'object',
-        properties: {flag: {type: 'boolean'}, list: {type: 'array'}},
+        properties: {
+          flag: {type: 'boolean'},
+          list: {type: 'array'},
+          note: {type: 'string'},
+        },
+        required: ['flag', 'list', 'note'],
       }),
-    ).toEqual({flag: true, list: []});
+    ).toEqual({flag: true, list: [], note: 'string'});
   });
 });
 
@@ -78,6 +93,19 @@ describe('tool catalog', () => {
   it('exposes input schemas for every tool', () => {
     for (const entry of tools) {
       expect(entry.inputSchema.type).toBe('object');
+    }
+  });
+
+  it('exposes output schemas for every tool', () => {
+    for (const entry of tools) {
+      expect(entry.outputSchema, `${entry.name} output schema`).toBeDefined();
+    }
+  });
+
+  it('declares at least one input property for every tool', () => {
+    for (const entry of tools) {
+      const count = Object.keys(entry.inputSchema.properties ?? {}).length;
+      expect(count, `${entry.name} input properties`).toBeGreaterThan(0);
     }
   });
 });
