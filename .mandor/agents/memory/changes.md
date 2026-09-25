@@ -10,4 +10,6 @@
   Record: `record-changes/2026-09-25-hash-tool.md`. Merged via PR #3.
 - 2026-09-25 — Add encoding tools: base64, hex, binary, url, html, rot13,
   morse, jwt (branch `feat/encoding-tools`).
-  Record: `record-changes/2026-09-25-encoding-tools.md`.
+  Record: `record-changes/2026-09-25-encoding-tools.md`. Merged via PR #4.
+- 2026-09-25 — Add `uuid` tool (branch `feat/uuid-tool`).
+  Record: `record-changes/2026-09-25-uuid-tool.md`.
