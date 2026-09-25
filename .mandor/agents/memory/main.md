@@ -2,8 +2,8 @@
 
 ## Status (2026-09-25)
 Project jalan. `main` memuat scaffold + text/json/hash + 8 encoding + uuid +
-7 web (PR #1-#6). CLI `describe` dikerjakan di branch `feat/cli-tool-describe`
-(belum di-merge). 20 tool terdaftar di `defaultTools`.
+7 web + CLI describe (PR #1-#7). MCP stdio server dikerjakan di branch
+`feat/mcp-stdio` (belum di-merge). 20 tool terdaftar; dua antarmuka: CLI dan MCP.
 
 ## Stack
 - Bahasa: TypeScript `^6.0.3` (strict, `module: nodenext`, `target: esnext`, ESM `"type": "module"`)
@@ -13,7 +13,8 @@ Project jalan. `main` memuat scaffold + text/json/hash + 8 encoding + uuid +
 
 ## Struktur aktual
 - `src/index.ts` — entry library (re-export + `defaultTools()`)
-- `src/cli.ts` — entry CLI (bin `agent-toolkit`), `-h`/`list`/`run`
+- `src/cli.ts` — entry CLI (bin `agent-toolkit`), `-h`/`list`/`describe`/`run`/`mcp`
+- `src/mcp.ts` — MCP stdio server (JSON-RPC 2.0)
 - `src/types/*.d.ts` — tipe publik terpusat (common, config, encoding, hash, json, text, tools, uuid, web, index)
 - `src/core/` — `config.ts`, `logger.ts`, `errors.ts`
 - `src/tools/` — `registry.ts`, `executor.ts` (`echo`), `args.ts`, `text-stats.ts`, `json-format.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `uuid.ts`, `web.ts` (7 tool `web.*`), `index.ts`
@@ -47,9 +48,11 @@ Project jalan. `main` memuat scaffold + text/json/hash + 8 encoding + uuid +
 - `npm run lint` / `npm run fix` — `gts lint` / `gts fix`
 - `npm run clean` — hapus `dist/`
 - CLI: `node dist/cli.js -h`, `... list`, `... list <tool>`, `... describe <tool>`,
-  `... run <tool> '{"json":...}'`
+  `... run <tool> '{"json":...}'`, `... mcp`
 
 ## Batasan
 - Kontrak output tool = MCP `CallToolResult`: `{content, structuredContent?, isError}`
 - CLI = binary tunggal `agent-toolkit` (`dist/cli.js`)
+- Antarmuka: CLI subcommand + MCP stdio (`agent-toolkit mcp`)
+- opencode config: key `mcp`, `"type": "local"`, `command` sebagai satu array
 - `package.json` `exports`: `.`, `./tools`, `./utils`, `./types`, `./package.json`
