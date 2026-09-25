@@ -29,3 +29,4 @@ First built-in tool, on branch `feat/text-stats-tool` (not merged).
 
 ## Not done
 - Branch not merged into `main` (user owns merges).
+- PR #1 opened: https://github.com/GTPSHAX/agent-toolkit/pull/1 (open, mergeable).
