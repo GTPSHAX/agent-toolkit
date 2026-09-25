@@ -43,3 +43,4 @@ export {
   rot13,
 } from './rot13-morse.js';
 export {decodeJwt} from './jwt.js';
+export {generateUuid, MAX_UUID, NIL_UUID, validateUuid} from './uuid.js';

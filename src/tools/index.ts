@@ -33,4 +33,10 @@ export {
   rot13Tool,
 } from './rot13-morse.js';
 export {JWT_TOOL_NAME, jwtTool} from './jwt.js';
+export {
+  DEFAULT_UUID_COUNT,
+  MAX_UUID_COUNT,
+  UUID_TOOL_NAME,
+  uuidTool,
+} from './uuid.js';
 export {isArgsObject, readBoolean, readMode, readString} from './args.js';
