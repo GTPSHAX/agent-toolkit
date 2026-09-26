@@ -73,6 +73,8 @@ export {
   extractPdfText,
   fetchDocument,
   fetchPage,
+  isFetchFormat,
+  selectFetchBody,
 } from './web-fetch.js';
 export {
   htmlToMarkdown,

@@ -27,6 +27,7 @@ export type {
   CrawlPage,
   CrawlResult,
   EngineOutcome,
+  FetchFormat,
   FreshnessWindow,
   MultiSourceResult,
   PageContent,
