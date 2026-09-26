@@ -1,5 +1,5 @@
 {
-  "name": "agent-toolkit",
+  "name": "@gtpshax/agent-toolkit",
   "version": "1.0.0",
   "description": "Standalone TypeScript toolkit of agent-callable tools with MCP-compatible output.",
   "type": "module",
@@ -62,6 +62,10 @@
   "homepage": "https://github.com/GTPSHAX/agent-toolkit#readme",
   "engines": {
     "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "devDependencies": {
     "@types/node": "^26.6.2",
