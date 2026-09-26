@@ -9,6 +9,7 @@ import {binaryTool, hexTool} from './tools/hex-binary.js';
 import {jsonFormatTool} from './tools/json-format.js';
 import {jsonQueryTool} from './tools/json-query.js';
 import {regexTool} from './tools/regex.js';
+import {base64FileTool, hashFileTool, hexFileTool} from './tools/file.js';
 import {jwtTool} from './tools/jwt.js';
 import {morseTool, rot13Tool} from './tools/rot13-morse.js';
 import {textStatsTool} from './tools/text-stats.js';
@@ -41,10 +42,13 @@ export {
   type McpServerOptions,
 } from './mcp.js';
 export {
+  BASE64_FILE_TOOL_NAME,
   BASE64_TOOL_NAME,
   BINARY_TOOL_NAME,
   DEFAULT_HASH_ALGORITHM,
   DEFAULT_UUID_COUNT,
+  HASH_FILE_TOOL_NAME,
+  HEX_FILE_TOOL_NAME,
   HEX_TOOL_NAME,
   HTML_TOOL_NAME,
   JWT_TOOL_NAME,
@@ -63,6 +67,7 @@ export {
   WEB_SUGGEST_TOOL_NAME,
   WEB_SUMMARY_TOOL_NAME,
   WEB_VERIFY_TOOL_NAME,
+  base64FileTool,
   base64Tool,
   binaryTool,
   createRegistry,
@@ -70,7 +75,9 @@ export {
   executeTool,
   failure,
   getTool,
+  hashFileTool,
   hashTool,
+  hexFileTool,
   hexTool,
   htmlTool,
   jsonFormatTool,
@@ -104,10 +111,12 @@ export {
   CRYPTO_HASH_ALGORITHMS,
   crawlDocumentation,
   crawlSitemap,
+  codecFile,
   cryptoHash,
   decodeJwt,
   DEFAULT_CRAWL_DEPTH,
   DEFAULT_CRAWL_MAX_LENGTH,
+  DEFAULT_FILE_MAX_LENGTH,
   DEFAULT_INDENT,
   DEFAULT_MAX_PAGES,
   DEFAULT_REGEX_MAX_LENGTH,
@@ -116,6 +125,7 @@ export {
   formatJson,
   generateUuid,
   HASH_ALGORITHMS,
+  hashFile,
   hashText,
   hexDecode,
   hexEncode,
@@ -139,10 +149,12 @@ export {
   protonHash64,
   queryJson,
   quote,
+  readFileBytes,
   readHtmlAttribute,
   REQUEST_METHODS,
   repeatChar,
   requestUrl,
+  resolveFilePath,
   rot13,
   SUPPORTED_FLAGS,
   truncate,
@@ -156,6 +168,7 @@ export {
   type RegexOptions,
 } from './utils/index.js';
 export type {
+  CodecFileResult,
   CodecMode,
   ContentItem,
   CrawlError,
@@ -165,7 +178,9 @@ export type {
   CryptoHashAlgorithm,
   EncodingFormat,
   ExecuteOptions,
+  FileEncoding,
   HashAlgorithm,
+  HashFileResult,
   JsonFormatOptions,
   JsonObject,
   JsonPrimitive,
@@ -209,8 +224,11 @@ export function defaultTools(): ToolDefinition[] {
     jsonQueryTool(),
     regexTool(),
     hashTool(),
+    hashFileTool(),
     base64Tool(),
+    base64FileTool(),
     hexTool(),
+    hexFileTool(),
     binaryTool(),
     urlTool(),
     htmlTool(),
