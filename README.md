@@ -125,8 +125,11 @@ and `command` as a single array:
 | `json.query` | Selects values from a JSON document with a jq-like path. |
 | `regex` | Tests, extracts, replaces, or splits with a regular expression. |
 | `hash` | Hashes text with MD5, SHA-1, SHA-256, SHA-512, or ProtonHash. |
+| `hash.file` | Hashes a file by path and returns only its digest and size. |
 | `base64` | Encodes or decodes Base64 text. |
+| `base64.file` | Base64-encodes a file, or decodes one into an output file. |
 | `hex` | Encodes or decodes hexadecimal text. |
+| `hex.file` | Hex-encodes a file, or decodes one into an output file. |
 | `binary` | Encodes or decodes 8-bit binary text. |
 | `url` | Encodes or decodes URL components. |
 | `html` | Encodes or decodes HTML entities. |
