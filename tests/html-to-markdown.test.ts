@@ -104,4 +104,11 @@ describe('extractLinks', () => {
       'https://docs.example.com/api',
     ]);
   });
+
+  it('ignores Markdown image sources', () => {
+    const markdown = '![diagram](/img/diagram.png) and [Guide](/guide)';
+    expect(extractLinks(markdown, base)).toEqual([
+      'https://docs.example.com/guide',
+    ]);
+  });
 });

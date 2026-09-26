@@ -78,7 +78,8 @@ export function extractLinks(content: string, baseUrl: string): string[] {
     }
   }
 
-  const markdownRe = /\]\(\s*(<[^>]+>|[^)\s]+)(?:\s+"[^"]*")?\s*\)/g;
+  const markdownRe =
+    /(?<!!)\[[^\]]*\]\(\s*(<[^>]+>|[^)\s]+)(?:\s+"[^"]*")?\s*\)/g;
   let link: RegExpExecArray | null;
   while ((link = markdownRe.exec(content)) !== null) {
     const target = (link[1] ?? '').replace(/^<(.*)>$/, '$1');
