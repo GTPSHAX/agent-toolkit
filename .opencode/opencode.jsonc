@@ -2,6 +2,13 @@
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "mandor",
   "subagent_depth": 1,
+  "mcp": {
+    "agent-toolkit": {
+      "type": "local",
+      "command": ["agent-toolkit", "mcp"],
+      "enabled": true
+    }
+  },
   "agent": {
     "plan": {
       "disable": true

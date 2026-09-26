@@ -29,3 +29,6 @@
   - Commit each meaningful unit of progress separately as it is completed.
   - Do not bundle unrelated changes or the entire task into a single commit.
   - Keep each commit atomic and scoped to one concern.
+- Use the `agent-toolkit` MCP server (`web.*` tools) for web search, fetch, suggest, summary, batch, verify, and research.
+  - Do not use the legacy `D:\workspace\testing\web-search.js` tool for searches anymore.
+  - The MCP is registered in `.opencode/opencode.jsonc` under `mcp.agent-toolkit` (local, `agent-toolkit mcp`).
