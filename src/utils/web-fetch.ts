@@ -16,6 +16,7 @@ import {
   httpGet,
   htmlToText,
 } from './web-core.js';
+import {htmlToMarkdown} from './html-to-markdown.js';
 
 /** Default maximum characters returned from a page. */
 export const DEFAULT_MAX_LENGTH = 20000;
@@ -61,6 +62,7 @@ export async function fetchPage(
     status: response.status,
     title: extractTitle(html),
     text: htmlToText(html).slice(0, maxLength),
+    markdown: htmlToMarkdown(html, {baseUrl: response.url}).slice(0, maxLength),
   };
   cacheSet('page', keyObj, page, noCache);
   return page;
@@ -209,6 +211,7 @@ export async function fetchDocument(
       0,
       options.maxLength ?? DEFAULT_MAX_LENGTH,
     ),
+    markdown: '',
     contentType: type || 'application/pdf',
     bytes: bytes.length,
   };

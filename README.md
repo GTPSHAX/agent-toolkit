@@ -133,7 +133,7 @@ and `command` as a single array:
 | `jwt` | Decodes a JSON Web Token header and payload without verifying the signature. |
 | `uuid` | Generates version 4 UUIDs or validates a UUID string. |
 | `web.search` | Searches the web via Google (headless browser, no API key) or DuckDuckGo. |
-| `web.fetch` | Fetches a page as readable text; reads PDFs and sitemaps. |
+| `web.fetch` | Fetches a page as Markdown; reads PDFs and sitemaps; crawls linked docs up to a depth. |
 | `web.suggest` | Returns Google autocomplete suggestions; no API key. |
 | `web.summary` | Searches and returns readable excerpts from top results. |
 | `web.batch` | Runs several search queries in one call. |
@@ -147,6 +147,22 @@ which requires no API key. Chrome or Edge must be installed (override the path
 with the `CHROME_PATH` environment variable). A `google-api` engine is also
 available for the official Custom Search JSON API, which requires
 `GOOGLE_API_KEY` and `GOOGLE_CX`; it is optional and never required.
+
+### Extracting documentation
+
+`web.fetch` returns a single page as **Markdown** (converted from HTML, with
+links resolved to absolute URLs). Passing `depth` greater than `1` follows
+in-content links breadth-first and concatenates the pages, which is useful for
+capturing a documentation subtree. The default crawl depth is `1` (single page)
+and the maximum is `5`; `maxPages` (default `25`), `sameOrigin` (default `true`),
+and `maxLength` bound the crawl.
+
+```jsonc
+// single page
+{"url": "https://example.com/guide"}
+// crawl up to 5 levels, same origin, at most 40 pages
+{"url": "https://example.com/guide", "depth": 5, "maxPages": 40}
+```
 
 ## Tool contract
 

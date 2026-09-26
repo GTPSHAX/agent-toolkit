@@ -17,8 +17,8 @@ dikerjakan di branch `feat/npm-publish` (belum di-merge).
 - `src/types/*.d.ts` — tipe publik terpusat (common, config, encoding, hash, json, text, tools, uuid, web, index)
 - `src/core/` — `config.ts`, `logger.ts`, `errors.ts`
 - `src/tools/` — `registry.ts`, `executor.ts` (`echo`), `args.ts`, `text-stats.ts`, `json-format.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `uuid.ts`, `web.ts` (7 tool `web.*`), `index.ts`
-- `src/utils/` — `text.ts`, `text-stats.ts`, `json.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `uuid.ts`, `web-core.ts`, `web-engines.ts`, `web-fetch.ts`, `web-search.ts`, `index.ts`
-- `tests/` — 14 file (vitest, 138 test)
+- `src/utils/` — `text.ts`, `text-stats.ts`, `json.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `uuid.ts`, `web-core.ts`, `web-engines.ts`, `web-fetch.ts`, `html-to-markdown.ts`, `web-crawl.ts`, `web-search.ts`, `index.ts`
+- `tests/` — 15 file (vitest, 150 test)
 - `scripts/copy-types.mjs` — copy `src/types` → `dist/types`
 - `scripts/doxygen-filter.mjs` — filter TypeScript→JS untuk Doxygen
 - `Doxyfile` — konfigurasi Doxygen (README sebagai main page)
