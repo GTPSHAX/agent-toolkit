@@ -26,6 +26,13 @@ export {
 } from './json.js';
 export {parsePath, queryJson} from './json-query.js';
 export {
+  DEFAULT_DELIMITER,
+  DEFAULT_EOL,
+  TAB_DELIMITER,
+  parseCsv,
+  stringifyCsv,
+} from './csv.js';
+export {
   CRYPTO_HASH_ALGORITHMS,
   cryptoHash,
   HASH_ALGORITHMS,
