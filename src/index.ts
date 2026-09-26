@@ -7,6 +7,7 @@ import {echoTool} from './tools/executor.js';
 import {hashTool} from './tools/hash.js';
 import {binaryTool, hexTool} from './tools/hex-binary.js';
 import {jsonFormatTool} from './tools/json-format.js';
+import {jsonQueryTool} from './tools/json-query.js';
 import {jwtTool} from './tools/jwt.js';
 import {morseTool, rot13Tool} from './tools/rot13-morse.js';
 import {textStatsTool} from './tools/text-stats.js';
@@ -45,6 +46,7 @@ export {
   HEX_TOOL_NAME,
   HTML_TOOL_NAME,
   JWT_TOOL_NAME,
+  JSON_QUERY_TOOL_NAME,
   MAX_UUID_COUNT,
   MORSE_TOOL_NAME,
   ROT13_TOOL_NAME,
@@ -68,6 +70,7 @@ export {
   hexTool,
   htmlTool,
   jsonFormatTool,
+  jsonQueryTool,
   jwtTool,
   listTools,
   morseTool,
@@ -121,10 +124,12 @@ export {
   morseEncode,
   NIL_UUID,
   parseArgv,
+  parsePath,
   PROTON_HASH_ALGORITHMS,
   PROTON_HASH_SEED,
   protonHash,
   protonHash64,
+  queryJson,
   quote,
   readHtmlAttribute,
   repeatChar,
@@ -151,6 +156,8 @@ export type {
   JsonFormatOptions,
   JsonObject,
   JsonPrimitive,
+  JsonQueryMatch,
+  JsonQueryResult,
   JsonSchema,
   JsonValue,
   JwtParts,
@@ -180,6 +187,7 @@ export function defaultTools(): ToolDefinition[] {
     echoTool(),
     textStatsTool(),
     jsonFormatTool(),
+    jsonQueryTool(),
     hashTool(),
     base64Tool(),
     hexTool(),

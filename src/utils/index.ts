@@ -18,6 +18,7 @@ export {
   MAX_INDENT,
   type JsonFormatResult,
 } from './json.js';
+export {parsePath, queryJson} from './json-query.js';
 export {
   CRYPTO_HASH_ALGORITHMS,
   cryptoHash,
