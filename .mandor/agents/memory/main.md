@@ -16,9 +16,9 @@ dikerjakan di branch `feat/npm-publish` (belum di-merge).
 - `src/mcp.ts` — MCP stdio server (JSON-RPC 2.0)
 - `src/types/*.d.ts` — tipe publik terpusat (common, config, encoding, hash, json, text, tools, uuid, web, index)
 - `src/core/` — `config.ts`, `logger.ts`, `errors.ts`
-- `src/tools/` — `registry.ts`, `executor.ts` (`echo`), `args.ts`, `text-stats.ts`, `json-format.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `uuid.ts`, `web.ts` (7 tool `web.*`), `index.ts`
-- `src/utils/` — `text.ts`, `text-stats.ts`, `json.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `uuid.ts`, `web-core.ts`, `web-engines.ts`, `web-fetch.ts`, `html-to-markdown.ts`, `web-crawl.ts`, `web-search.ts`, `index.ts`
-- `tests/` — 15 file (vitest, 150 test)
+- `src/tools/` — `registry.ts`, `executor.ts` (`echo`), `args.ts`, `text-stats.ts`, `json-format.ts`, `json-query.ts`, `regex.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `uuid.ts`, `web.ts` (8 tool `web.*`), `index.ts`
+- `src/utils/` — `text.ts`, `text-stats.ts`, `json.ts`, `json-query.ts`, `regex.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `uuid.ts`, `web-core.ts`, `web-engines.ts`, `web-fetch.ts`, `html-to-markdown.ts`, `web-crawl.ts`, `web-request.ts`, `web-search.ts`, `index.ts`
+- `tests/` — 16 file (vitest, 160 test)
 - `scripts/copy-types.mjs` — copy `src/types` → `dist/types`
 - `scripts/doxygen-filter.mjs` — filter TypeScript→JS untuk Doxygen
 - `Doxyfile` — konfigurasi Doxygen (README sebagai main page)
@@ -40,7 +40,7 @@ dikerjakan di branch `feat/npm-publish` (belum di-merge).
 - GitHub Pages aktif (`build_type: workflow`): https://gtpshax.github.io/agent-toolkit/
 - Publish npm pakai trusted publishing (OIDC), tanpa token; setup di npmjs.com
   dengan workflow filename `publish.yml`.
-- Tool terdaftar di `defaultTools`: 20.
+- Tool terdaftar di `defaultTools`: 23.
 - Web: default engine `google` via headless Chrome/Edge (tanpa API key);
   `google-api` opsional (butuh `GOOGLE_API_KEY` + `GOOGLE_CX`).
 
