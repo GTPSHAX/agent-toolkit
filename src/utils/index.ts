@@ -82,6 +82,11 @@ export {
   extractLinks,
 } from './web-crawl.js';
 export {
+  DEFAULT_REQUEST_MAX_LENGTH,
+  REQUEST_METHODS,
+  requestUrl,
+} from './web-request.js';
+export {
   FRESHNESS_MAP,
   MAX_CONCURRENT_RENDERS,
   duckDuckGoSearch,
