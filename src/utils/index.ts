@@ -26,6 +26,13 @@ export {
 } from './json.js';
 export {parsePath, queryJson} from './json-query.js';
 export {
+  DEFAULT_DELIMITER,
+  DEFAULT_EOL,
+  TAB_DELIMITER,
+  parseCsv,
+  stringifyCsv,
+} from './csv.js';
+export {
   DEFAULT_TIME_FORMAT,
   DEFAULT_TIME_LOCALE,
   addTime,
@@ -35,6 +42,7 @@ export {
   parseDuration,
   parseTime,
 } from './time.js';
+export {
   DEFAULT_FILE_MAX_LENGTH,
   codecFile,
   hashFile,

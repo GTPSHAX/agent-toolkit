@@ -9,6 +9,7 @@ import {binaryTool, hexTool} from './tools/hex-binary.js';
 import {jsonFormatTool} from './tools/json-format.js';
 import {jsonQueryTool} from './tools/json-query.js';
 import {regexTool} from './tools/regex.js';
+import {csvTool} from './tools/csv.js';
 import {timeTool} from './tools/time.js';
 import {base64FileTool, hashFileTool, hexFileTool} from './tools/file.js';
 import {jwtTool} from './tools/jwt.js';
@@ -46,6 +47,7 @@ export {
   BASE64_FILE_TOOL_NAME,
   BASE64_TOOL_NAME,
   BINARY_TOOL_NAME,
+  CSV_TOOL_NAME,
   DEFAULT_HASH_ALGORITHM,
   DEFAULT_UUID_COUNT,
   HASH_FILE_TOOL_NAME,
@@ -73,6 +75,7 @@ export {
   base64Tool,
   binaryTool,
   createRegistry,
+  csvTool,
   echoTool,
   executeTool,
   failure,
@@ -119,6 +122,7 @@ export {
   decodeJwt,
   DEFAULT_CRAWL_DEPTH,
   DEFAULT_CRAWL_MAX_LENGTH,
+  DEFAULT_DELIMITER,
   DEFAULT_FILE_MAX_LENGTH,
   DEFAULT_INDENT,
   DEFAULT_TIME_FORMAT,
@@ -147,6 +151,7 @@ export {
   morseEncode,
   NIL_UUID,
   parseArgv,
+  parseCsv,
   parsePath,
   PROTON_HASH_ALGORITHMS,
   PROTON_HASH_SEED,
@@ -161,7 +166,9 @@ export {
   requestUrl,
   resolveFilePath,
   rot13,
+  stringifyCsv,
   SUPPORTED_FLAGS,
+  TAB_DELIMITER,
   addTime,
   describeTime,
   diffTime,
@@ -187,6 +194,9 @@ export type {
   CrawlPage,
   CrawlResult,
   CryptoHashAlgorithm,
+  CsvMode,
+  CsvResult,
+  CsvTable,
   EncodingFormat,
   ExecuteOptions,
   FileEncoding,
@@ -238,6 +248,7 @@ export function defaultTools(): ToolDefinition[] {
     jsonFormatTool(),
     jsonQueryTool(),
     regexTool(),
+    csvTool(),
     timeTool(),
     hashTool(),
     hashFileTool(),
