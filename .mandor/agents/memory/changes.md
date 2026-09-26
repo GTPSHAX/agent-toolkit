@@ -28,3 +28,8 @@
 - 2026-09-26 — Publish to npm via trusted publishing; package renamed to
   `@gtpshax/agent-toolkit` (branch `feat/npm-publish`).
   Record: `record-changes/2026-09-26-npm-publish.md`.
+- 2026-09-26 — Register the agent-toolkit MCP server in opencode (branch
+  `chore/opencode-mcp`). Merged via PR #15.
+- 2026-09-26 — web.fetch returns Markdown and can crawl linked docs up to a
+  depth (branch `feat/web-fetch-extract`).
+  Record: `record-changes/2026-09-26-web-fetch-extract.md`. PR #16 open.
