@@ -24,7 +24,7 @@ Extract documentation from the web tools: fetched pages become Markdown and
   (`formatCrawl`) when `depth > 1`.
 - Exports: `utils/index.ts`, `types/index.d.ts`, `src/index.ts`.
 - `README.md`: Markdown output plus depth/maxPages/sameOrigin examples.
-- `tests/html-to-markdown.test.ts` (new): 11 tests; `tests/tools.test.ts`
+- `tests/html-to-markdown.test.ts` (new): 12 tests; `tests/tools.test.ts`
   narrowed a `content[0]` access for the union type.
 
 ## Tool contract
@@ -35,7 +35,7 @@ Extract documentation from the web tools: fetched pages become Markdown and
   truncated, fetchedAt}`.
 
 ## Verification
-- `npm test` → 149 tests pass (15 files).
+- `npm test` → 150 tests pass (15 files).
 - `npm run lint` → clean; `npm run build` → exit 0.
 - Live: `web.fetch https://example.com` → Markdown with an absolute link;
   `depth: 2` on `https://nodejs.org/en/about` → root + 3 depth-1 pages,
