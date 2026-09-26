@@ -26,6 +26,15 @@ export {
 } from './json.js';
 export {parsePath, queryJson} from './json-query.js';
 export {
+  DEFAULT_TIME_FORMAT,
+  DEFAULT_TIME_LOCALE,
+  addTime,
+  describeTime,
+  diffTime,
+  formatTime,
+  parseDuration,
+  parseTime,
+} from './time.js';
   DEFAULT_FILE_MAX_LENGTH,
   codecFile,
   hashFile,
