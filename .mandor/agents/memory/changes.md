@@ -21,4 +21,7 @@
   Merged via PR #7.
 - 2026-09-25 — Add MCP stdio server and `mcp` subcommand (branch `feat/mcp-stdio`).
   Record: `record-changes/2026-09-25-mcp-stdio.md`. Merged via PR #8.
-- 2026-09-25 — Add project README (branch `docs/readme`).
+- 2026-09-25 — Add project README (branch `docs/readme`). Merged via PR #9.
+- 2026-09-26 — Add MIT license, package metadata, CI, and Doxygen docs
+  (branches `chore/license-ci-docs`, `fix/docs-workflow`).
+  Record: `record-changes/2026-09-26-license-ci-docs.md`.

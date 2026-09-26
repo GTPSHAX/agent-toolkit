@@ -1,8 +1,9 @@
 # main.md — agent-toolkit
 
-## Status (2026-09-25)
-Project jalan. `main` memuat semua fitur (PR #1-#8): 20 tool, CLI, dan MCP
-stdio server. README dikerjakan di branch `docs/readme` (belum di-merge).
+## Status (2026-09-26)
+Project jalan dan publik. `main` memuat semua fitur (PR #1-#10): 20 tool, CLI,
+MCP stdio, README, lisensi MIT, CI, dan workflow docs Doxygen. Perbaikan docs
+workflow dikerjakan di branch `fix/docs-workflow` (belum di-merge).
 
 ## Stack
 - Bahasa: TypeScript `^6.0.3` (strict, `module: nodenext`, `target: esnext`, ESM `"type": "module"`)
@@ -20,12 +21,19 @@ stdio server. README dikerjakan di branch `docs/readme` (belum di-merge).
 - `src/utils/` — `text.ts`, `text-stats.ts`, `json.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `uuid.ts`, `web-core.ts`, `web-engines.ts`, `web-fetch.ts`, `web-search.ts`, `index.ts`
 - `tests/` — 14 file (vitest, 138 test)
 - `scripts/copy-types.mjs` — copy `src/types` → `dist/types`
+- `scripts/doxygen-filter.mjs` — filter TypeScript→JS untuk Doxygen
+- `Doxyfile` — konfigurasi Doxygen (README sebagai main page)
+- `.github/workflows/ci.yml` — lint/build/test (Node 22, 24)
+- `.github/workflows/docs.yml` — build Doxygen + deploy GitHub Pages
+- `LICENSE` — MIT
 - `dist/` — output build (di-gitignore)
+- `docs/api/` — output Doxygen (di-gitignore)
 - `README.md` — dokumentasi publik (CLI + MCP, daftar tool, kontrak, dev)
 
 ## Git
-- Remote `origin`: https://github.com/GTPSHAX/agent-toolkit.git (private)
-- `main` memuat semua fitur (PR #1-#8): 20 tool, CLI, MCP stdio.
+- Remote `origin`: https://github.com/GTPSHAX/agent-toolkit.git (public)
+- `main` memuat semua fitur (PR #1-#10).
+- GitHub Pages aktif (`build_type: workflow`): https://gtpshax.github.io/agent-toolkit/
 - Tool terdaftar di `defaultTools`: 20.
 - Web: default engine `google` via headless Chrome/Edge (tanpa API key);
   `google-api` opsional (butuh `GOOGLE_API_KEY` + `GOOGLE_CX`).
@@ -33,17 +41,19 @@ stdio server. README dikerjakan di branch `docs/readme` (belum di-merge).
 ## Config
 - `tsconfig.json` — dev/typecheck (`noEmit: true`, include `src`+`tests`)
 - `tsconfig.build.json` — build (`rootDir: src`, `outDir: dist`, declaration on)
-- `eslint.config.mjs` — extends `gts`, ignores `dist/`
+- `eslint.config.mjs` — extends `gts`, ignores `dist/` dan `docs/api/`
 - `.prettierrc.cjs` — `...require('gts/.prettierrc.json')`
-- `.gitignore` — `node_modules/`, `dist/`
+- `.gitignore` — `node_modules/`, `dist/`, `docs/api/`
 - `.gitattributes` — `* text=auto eol=lf` (jaga EOL LF di checkout; dengan
   `core.autocrlf=true` tanpa ini, Prettier gagal tiap checkpoint)
+- `package.json` `license`: MIT; `engines`: Node >= 18
 
 ## Perintah
 - `npm run build` — `tsc -p tsconfig.build.json` + copy types
 - `npm test` — `vitest run`
 - `npm run lint` / `npm run fix` — `gts lint` / `gts fix`
 - `npm run clean` — hapus `dist/`
+- `npm run docs` — generate API docs Doxygen ke `docs/api/html`
 - CLI: `node dist/cli.js -h`, `... list`, `... list <tool>`, `... describe <tool>`,
   `... run <tool> '{"json":...}'`, `... mcp`
 
