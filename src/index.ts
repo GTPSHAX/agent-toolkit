@@ -9,6 +9,7 @@ import {binaryTool, hexTool} from './tools/hex-binary.js';
 import {jsonFormatTool} from './tools/json-format.js';
 import {jsonQueryTool} from './tools/json-query.js';
 import {regexTool} from './tools/regex.js';
+import {pathTool} from './tools/path.js';
 import {jwtTool} from './tools/jwt.js';
 import {morseTool, rot13Tool} from './tools/rot13-morse.js';
 import {textStatsTool} from './tools/text-stats.js';
@@ -51,6 +52,7 @@ export {
   JSON_QUERY_TOOL_NAME,
   MAX_UUID_COUNT,
   MORSE_TOOL_NAME,
+  PATH_TOOL_NAME,
   REGEX_TOOL_NAME,
   ROT13_TOOL_NAME,
   URL_TOOL_NAME,
@@ -78,6 +80,7 @@ export {
   jwtTool,
   listTools,
   morseTool,
+  pathTool,
   regexTool,
   rot13Tool,
   success,
@@ -110,6 +113,7 @@ export {
   DEFAULT_CRAWL_MAX_LENGTH,
   DEFAULT_INDENT,
   DEFAULT_MAX_PAGES,
+  DEFAULT_PATH_PLATFORM,
   DEFAULT_REGEX_MAX_LENGTH,
   DEFAULT_REQUEST_MAX_LENGTH,
   extractLinks,
@@ -133,6 +137,8 @@ export {
   NIL_UUID,
   parseArgv,
   parsePath,
+  parsePathParts,
+  pathApi,
   PROTON_HASH_ALGORITHMS,
   PROTON_HASH_SEED,
   protonHash,
@@ -176,6 +182,10 @@ export type {
   JwtParts,
   LogLevel,
   ProtonHashAlgorithm,
+  PathAction,
+  PathParts,
+  PathPlatform,
+  PathResult,
   RegexMatch,
   RegexMode,
   RegexResult,
@@ -208,6 +218,7 @@ export function defaultTools(): ToolDefinition[] {
     jsonFormatTool(),
     jsonQueryTool(),
     regexTool(),
+    pathTool(),
     hashTool(),
     base64Tool(),
     hexTool(),
