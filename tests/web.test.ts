@@ -18,6 +18,7 @@ import {
   extractTitle,
   htmlToText,
 } from '../src/utils/web-core.js';
+import {isFetchFormat, selectFetchBody} from '../src/utils/web-fetch.js';
 import {
   annotateDuplicates,
   labelQuality,
@@ -121,6 +122,30 @@ describe('labelQuality', () => {
     expect(flagged[0]?.quality?.flags).toContain('attention');
     expect(flagged[0]?.quality?.flags).toContain('suspicious-tld');
     expect(flagged[1]?.quality?.label).toBe('normal');
+  });
+});
+
+describe('selectFetchBody', () => {
+  const page = {
+    url: 'https://x.test/a',
+    status: 200,
+    title: 'A',
+    text: 'plain',
+    markdown: '# md',
+    html: '<h1>md</h1>',
+  };
+  it('returns the body for each format', () => {
+    expect(selectFetchBody(page, 'markdown')).toBe('# md');
+    expect(selectFetchBody(page, 'text')).toBe('plain');
+    expect(selectFetchBody(page, 'html')).toBe('<h1>md</h1>');
+  });
+
+  it('recognizes supported formats', () => {
+    expect(isFetchFormat('markdown')).toBe(true);
+    expect(isFetchFormat('text')).toBe(true);
+    expect(isFetchFormat('html')).toBe(true);
+    expect(isFetchFormat('pdf')).toBe(false);
+    expect(isFetchFormat(undefined)).toBe(false);
   });
 });
 

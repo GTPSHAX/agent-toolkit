@@ -142,7 +142,7 @@ and `command` as a single array:
 | `uuid` | Generates version 4 UUIDs or validates a UUID string. |
 | `path` | Joins, resolves, normalizes, compares, and parses POSIX or Windows paths. |
 | `web.search` | Searches the web via Google (headless browser, no API key) or DuckDuckGo. |
-| `web.fetch` | Fetches a page as Markdown; reads PDFs and sitemaps; crawls linked docs up to a depth. |
+| `web.fetch` | Fetches a page as Markdown, text, or raw HTML; reads PDFs and sitemaps; crawls linked docs up to a depth. |
 | `web.request` | Performs a generic HTTP request and returns status, headers, and a JSON or text body. |
 | `web.suggest` | Returns Google autocomplete suggestions; no API key. |
 | `web.summary` | Searches and returns readable excerpts from top results. |
@@ -170,9 +170,14 @@ and `maxLength` bound the crawl.
 ```jsonc
 // single page
 {"url": "https://example.com/guide"}
+// raw HTML instead of Markdown, e.g. for parser work
+{"url": "https://example.com/guide", "format": "html"}
 // crawl up to 5 levels, same origin, at most 40 pages
 {"url": "https://example.com/guide", "depth": 5, "maxPages": 40}
 ```
+
+`format` accepts `markdown` (default), `text`, or `html` for single pages;
+crawls always return Markdown.
 
 ## Tool contract
 

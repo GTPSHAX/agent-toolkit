@@ -87,9 +87,13 @@ export interface PageContent {
   readonly title: string;
   readonly text: string;
   readonly markdown: string;
+  readonly html: string;
   readonly contentType?: string;
   readonly bytes?: number;
 }
+
+/** Single-page output format accepted by `web.fetch`. */
+export type FetchFormat = 'markdown' | 'text' | 'html';
 
 /** Options accepted by {@link crawlDocumentation}. */
 export interface CrawlOptions {

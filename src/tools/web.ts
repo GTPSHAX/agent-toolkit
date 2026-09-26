@@ -14,7 +14,12 @@ import type {
 } from '../types/web.js';
 import type {ToolDefinition, ToolOutput} from '../types/tools.js';
 import type {JsonSchema} from '../types/tools.js';
-import {crawlSitemap, fetchDocument} from '../utils/web-fetch.js';
+import {
+  crawlSitemap,
+  fetchDocument,
+  isFetchFormat,
+  selectFetchBody,
+} from '../utils/web-fetch.js';
 import {crawlDocumentation} from '../utils/web-crawl.js';
 import {REQUEST_METHODS, requestUrl} from '../utils/web-request.js';
 import {
@@ -158,8 +163,8 @@ export function webFetchTool(): ToolDefinition {
     name: WEB_FETCH_TOOL_NAME,
     title: 'Web fetch',
     description:
-      'Fetches a page as Markdown; reads PDFs and sitemaps; crawls linked ' +
-      'documentation up to a depth.',
+      'Fetches a page as Markdown, text, or raw HTML; reads PDFs and ' +
+      'sitemaps; crawls linked documentation up to a depth.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -168,6 +173,13 @@ export function webFetchTool(): ToolDefinition {
           type: 'string',
           description: 'Fetch a page/document or a sitemap.',
           enum: ['document', 'sitemap'],
+        },
+        format: {
+          type: 'string',
+          description:
+            'Single-page output format; defaults to markdown. Crawls always ' +
+            'return Markdown.',
+          enum: ['markdown', 'text', 'html'],
         },
         depth: {
           type: 'number',
@@ -192,6 +204,7 @@ export function webFetchTool(): ToolDefinition {
         title: {type: 'string'},
         text: {type: 'string'},
         markdown: {type: 'string'},
+        html: {type: 'string'},
         contentType: {type: 'string'},
         bytes: {type: 'number'},
         sitemap: {type: 'string'},
@@ -503,7 +516,12 @@ async function handleWebFetch(args: JsonValue): Promise<ToolOutput> {
       return success(formatCrawl(crawl), toJson(crawl));
     }
     const page = await fetchDocument(url, shared);
-    return success(page.markdown, toJson(page));
+    const requested = readString(args, 'format');
+    const format = isFetchFormat(requested) ? requested : 'markdown';
+    if (format === 'html' && page.html.length === 0) {
+      return failure('web.fetch: no HTML available for this document');
+    }
+    return success(selectFetchBody(page, format), toJson(page));
   } catch (cause) {
     return failure(`web.fetch: ${errorMessage(cause)}`);
   }

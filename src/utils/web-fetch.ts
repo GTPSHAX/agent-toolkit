@@ -5,7 +5,7 @@
 import {Buffer} from 'node:buffer';
 import {inflateSync} from 'node:zlib';
 
-import type {PageContent, SitemapResult} from '../types/web.js';
+import type {FetchFormat, PageContent, SitemapResult} from '../types/web.js';
 import {
   DEFAULT_TIMEOUT_MS,
   assertPublicUrl,
@@ -63,9 +63,41 @@ export async function fetchPage(
     title: extractTitle(html),
     text: htmlToText(html).slice(0, maxLength),
     markdown: htmlToMarkdown(html, {baseUrl: response.url}).slice(0, maxLength),
+    html: html.slice(0, maxLength),
   };
   cacheSet('page', keyObj, page, noCache);
   return page;
+}
+
+/**
+ * @brief Selects the single-page body for a requested output format.
+ *
+ * @param page Fetched page content.
+ * @param format Requested format.
+ * @return The Markdown, plain-text, or raw HTML body.
+ */
+export function selectFetchBody(
+  page: PageContent,
+  format: FetchFormat,
+): string {
+  switch (format) {
+    case 'text':
+      return page.text;
+    case 'html':
+      return page.html;
+    default:
+      return page.markdown;
+  }
+}
+
+/**
+ * @brief Checks whether a value is a supported fetch format.
+ *
+ * @param value Candidate format.
+ * @return True for `markdown`, `text`, or `html`.
+ */
+export function isFetchFormat(value: string | undefined): value is FetchFormat {
+  return value === 'markdown' || value === 'text' || value === 'html';
 }
 
 /**
@@ -212,6 +244,7 @@ export async function fetchDocument(
       options.maxLength ?? DEFAULT_MAX_LENGTH,
     ),
     markdown: '',
+    html: '',
     contentType: type || 'application/pdf',
     bytes: bytes.length,
   };
