@@ -124,9 +124,15 @@ and `command` as a single array:
 | `json.format` | Parses and pretty-prints or compacts a JSON document. |
 | `json.query` | Selects values from a JSON document with a jq-like path. |
 | `regex` | Tests, extracts, replaces, or splits with a regular expression. |
+| `semver` | Parses, compares, bumps, and range-checks semantic versions. |
+| `csv` | Parses CSV/TSV text into rows or serializes records into CSV/TSV. |
+| `time` | Parses, formats, shifts, and compares timestamps across time zones. |
 | `hash` | Hashes text with MD5, SHA-1, SHA-256, SHA-512, or ProtonHash. |
+| `hash.file` | Hashes a file by path and returns only its digest and size. |
 | `base64` | Encodes or decodes Base64 text. |
+| `base64.file` | Base64-encodes a file, or decodes one into an output file. |
 | `hex` | Encodes or decodes hexadecimal text. |
+| `hex.file` | Hex-encodes a file, or decodes one into an output file. |
 | `binary` | Encodes or decodes 8-bit binary text. |
 | `url` | Encodes or decodes URL components. |
 | `html` | Encodes or decodes HTML entities. |
@@ -134,6 +140,7 @@ and `command` as a single array:
 | `morse` | Encodes text as Morse code or decodes Morse code. |
 | `jwt` | Decodes a JSON Web Token header and payload without verifying the signature. |
 | `uuid` | Generates version 4 UUIDs or validates a UUID string. |
+| `path` | Joins, resolves, normalizes, compares, and parses POSIX or Windows paths. |
 | `web.search` | Searches the web via Google (headless browser, no API key) or DuckDuckGo. |
 | `web.fetch` | Fetches a page as Markdown, text, or raw HTML; reads PDFs and sitemaps; crawls linked docs up to a depth. |
 | `web.request` | Performs a generic HTTP request and returns status, headers, and a JSON or text body. |

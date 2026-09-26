@@ -16,6 +16,11 @@ export type {
   JsonQueryResult,
 } from './json.js';
 export type {RegexMatch, RegexMode, RegexResult} from './regex.js';
+export type {PathAction, PathParts, PathPlatform, PathResult} from './path.js';
+export type {SemVer, SemverAction, SemverResult} from './semver.js';
+export type {CsvMode, CsvResult, CsvTable} from './csv.js';
+export type {TimeAction, TimePoint, TimeResult, TimeSpan} from './time.js';
+export type {CodecFileResult, FileEncoding, HashFileResult} from './file.js';
 export type {TextStats} from './text.js';
 export type {UuidString, UuidValidation, UuidVersion} from './uuid.js';
 export type {
