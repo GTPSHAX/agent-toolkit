@@ -24,7 +24,7 @@
     "./package.json": "./package.json"
   },
   "bin": {
-    "agent-toolkit": "./dist/cli.js"
+    "agent-toolkit": "dist/cli.js"
   },
   "files": [
     "dist",
@@ -64,8 +64,7 @@
     "node": ">=18"
   },
   "publishConfig": {
-    "access": "public",
-    "provenance": true
+    "access": "public"
   },
   "devDependencies": {
     "@types/node": "^26.6.2",
@@ -75,4 +74,3 @@
     "vitest": "^5.0.2"
   }
 }
-

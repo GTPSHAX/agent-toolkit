@@ -34,7 +34,15 @@ On npmjs.com, add a trusted publisher for `@gtpshax/agent-toolkit`:
 - `npm install` synced the lockfile to `@gtpshax/agent-toolkit`.
 - `npm run lint` clean; `npm run build` exit 0; `npm test` 138 tests pass.
 - `npm pack --dry-run`: `@gtpshax/agent-toolkit@1.0.0`, 157 files, ~79 kB.
+- First publish done manually: `@gtpshax/agent-toolkit@1.0.0` is on npm
+  (maintainer `gtpshax`). Local publish required 2FA (`--otp`).
+
+## Fix after merge
+- `provenance: true` in `publishConfig` made a local publish fail with
+  "Automatic provenance generation not supported for provider: null".
+  Provenance is automatic under trusted publishing, so it was removed
+  (`c5363f8`, PR #13) and `npm pkg fix` normalized the `bin` path.
 
 ## Not done
-- No tag pushed yet, so the workflow has not run.
-- Branch not merged into `main`.
+- No tag pushed, so the OIDC publish workflow has not run yet.
+- Trusted publisher still needs to be configured on npmjs.com.
