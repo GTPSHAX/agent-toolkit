@@ -19,6 +19,7 @@ export {TEXT_STATS_TOOL_NAME, textStatsTool} from './text-stats.js';
 export {JSON_FORMAT_TOOL_NAME, jsonFormatTool} from './json-format.js';
 export {JSON_QUERY_TOOL_NAME, jsonQueryTool} from './json-query.js';
 export {REGEX_TOOL_NAME, regexTool} from './regex.js';
+export {SEMVER_TOOL_NAME, semverTool} from './semver.js';
 export {CSV_TOOL_NAME, csvTool} from './csv.js';
 export {TIME_TOOL_NAME, timeTool} from './time.js';
 export {

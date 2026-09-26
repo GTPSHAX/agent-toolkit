@@ -26,6 +26,14 @@ export {
 } from './json.js';
 export {parsePath, queryJson} from './json-query.js';
 export {
+  bumpVersion,
+  compareVersions,
+  parseRange,
+  parseVersion,
+  satisfiesRange,
+  type SemverRelease,
+} from './semver.js';
+export {
   DEFAULT_DELIMITER,
   DEFAULT_EOL,
   TAB_DELIMITER,
