@@ -36,4 +36,10 @@
 - 2026-09-26 — Add generic HTTP request, regex, and JSON path tools (branches
   `feat/web-request`, `feat/regex-tool`, `feat/json-query-tool`).
   Record: `record-changes/2026-09-26-request-regex-jsonquery.md`.
+- 2026-09-26 — Second tool batch: file hashing/encoding, time, csv, semver,
+  path, and a raw-HTML mode for `web.fetch` (branches `feat/file-tools`,
+  `feat/time-tool`, `feat/csv-tool`, `feat/semver-tool`, `feat/path-tool`,
+  `feat/web-fetch-format`).
+  Record: `record-changes/2026-09-26-tools-batch-2.md`.
+  PRs #21, #22, #23, #24, #25, #26 open.
   PRs #17, #18, #19 open.
