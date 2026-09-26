@@ -63,7 +63,8 @@ describe('executeTool', () => {
     const registry = createRegistry([failingTool]);
     const output = await executeTool(registry, 'boom', {});
     expect(output.isError).toBe(true);
-    expect(output.content[0]?.text).toContain('exploded');
+    const [block] = output.content;
+    expect(block?.type === 'text' ? block.text : '').toContain('exploded');
   });
 
   it('throws for unknown tools', async () => {

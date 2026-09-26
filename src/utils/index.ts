@@ -68,6 +68,20 @@ export {
   fetchPage,
 } from './web-fetch.js';
 export {
+  htmlToMarkdown,
+  readHtmlAttribute,
+  type HtmlToMarkdownOptions,
+} from './html-to-markdown.js';
+export {
+  DEFAULT_CRAWL_DEPTH,
+  DEFAULT_CRAWL_MAX_LENGTH,
+  DEFAULT_MAX_PAGES,
+  MAX_CRAWL_DEPTH,
+  MAX_CRAWL_PAGES,
+  crawlDocumentation,
+  extractLinks,
+} from './web-crawl.js';
+export {
   FRESHNESS_MAP,
   MAX_CONCURRENT_RENDERS,
   duckDuckGoSearch,

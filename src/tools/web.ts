@@ -4,6 +4,7 @@
 
 import type {JsonValue} from '../types/common.js';
 import type {
+  CrawlResult,
   FreshnessWindow,
   SearchEngine,
   SearchResult,
@@ -12,6 +13,7 @@ import type {
 import type {ToolDefinition, ToolOutput} from '../types/tools.js';
 import type {JsonSchema} from '../types/tools.js';
 import {crawlSitemap, fetchDocument} from '../utils/web-fetch.js';
+import {crawlDocumentation} from '../utils/web-crawl.js';
 import {
   isFreshnessWindow,
   isSearchEngine,
@@ -122,13 +124,16 @@ export function webSearchTool(): ToolDefinition {
 /**
  * @brief Creates the `web.fetch` tool.
  *
- * @return A tool definition that reads pages, documents, or sitemaps.
+ * @return A tool definition that reads pages, documents, sitemaps, or a
+ *   linked documentation subtree.
  */
 export function webFetchTool(): ToolDefinition {
   return {
     name: WEB_FETCH_TOOL_NAME,
     title: 'Web fetch',
-    description: 'Fetches a page as readable text; reads PDFs and sitemaps.',
+    description:
+      'Fetches a page as Markdown; reads PDFs and sitemaps; crawls linked ' +
+      'documentation up to a depth.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -138,7 +143,18 @@ export function webFetchTool(): ToolDefinition {
           description: 'Fetch a page/document or a sitemap.',
           enum: ['document', 'sitemap'],
         },
+        depth: {
+          type: 'number',
+          description:
+            'Link-following depth, 1-5; above 1 crawls the documentation.',
+        },
+        maxPages: {type: 'number', description: 'Maximum pages when crawling.'},
+        sameOrigin: {
+          type: 'boolean',
+          description: 'Restrict crawled pages to the entry origin.',
+        },
         maxLength: {type: 'number', description: 'Maximum characters.'},
+        noCache: {type: 'boolean', description: 'Skip the disk cache.'},
       },
       required: ['url'],
     },
@@ -149,11 +165,29 @@ export function webFetchTool(): ToolDefinition {
         status: {type: 'number'},
         title: {type: 'string'},
         text: {type: 'string'},
+        markdown: {type: 'string'},
         contentType: {type: 'string'},
         bytes: {type: 'number'},
         sitemap: {type: 'string'},
         urls: {type: 'array', items: {type: 'string'}},
         count: {type: 'number'},
+        depth: {type: 'number'},
+        pages: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              url: {type: 'string'},
+              depth: {type: 'number'},
+              title: {type: 'string'},
+              markdown: {type: 'string'},
+            },
+            required: ['url', 'depth', 'title', 'markdown'],
+          },
+        },
+        errors: {type: 'array'},
+        visited: {type: 'number'},
+        truncated: {type: 'boolean'},
         fetchedAt: {type: 'string'},
       },
       required: ['url'],
@@ -366,8 +400,10 @@ async function handleWebSearch(args: JsonValue): Promise<ToolOutput> {
 /**
  * @brief Handles a `web.fetch` invocation.
  *
+ * Reads a single page, follows linked pages up to `depth`, or reads a sitemap.
+ *
  * @param args Arguments carrying the URL and options.
- * @return Page output, or an error output.
+ * @return Page, crawl, or sitemap output, or an error output.
  */
 async function handleWebFetch(args: JsonValue): Promise<ToolOutput> {
   const url = readString(args, 'url');
@@ -375,15 +411,30 @@ async function handleWebFetch(args: JsonValue): Promise<ToolOutput> {
     return failure('web.fetch requires a "url" string argument');
   }
   const maxLength = readNumber(args, 'maxLength');
+  const noCache = readBoolean(args, 'noCache');
+  const depth = readNumber(args, 'depth');
   try {
     if (readString(args, 'mode') === 'sitemap') {
       const sitemap = await crawlSitemap(url);
       return success(sitemap.urls.join('\n'), toJson(sitemap));
     }
-    const page = await fetchDocument(url, {
+    const shared = {
       ...(maxLength === undefined ? {} : {maxLength}),
-    });
-    return success(page.text, toJson(page));
+      ...(noCache === undefined ? {} : {noCache}),
+    };
+    if (depth !== undefined && depth > 1) {
+      const maxPages = readNumber(args, 'maxPages');
+      const sameOrigin = readBoolean(args, 'sameOrigin');
+      const crawl = await crawlDocumentation(url, {
+        ...shared,
+        depth,
+        ...(maxPages === undefined ? {} : {maxPages}),
+        ...(sameOrigin === undefined ? {} : {sameOrigin}),
+      });
+      return success(formatCrawl(crawl), toJson(crawl));
+    }
+    const page = await fetchDocument(url, shared);
+    return success(page.markdown, toJson(page));
   } catch (cause) {
     return failure(`web.fetch: ${errorMessage(cause)}`);
   }
@@ -589,6 +640,36 @@ function readStringArray(args: JsonValue, key: string): string[] | undefined {
     value.every((item): item is string => typeof item === 'string')
     ? value
     : undefined;
+}
+
+/**
+ * @brief Renders a crawl as one Markdown document.
+ *
+ * @param crawl Crawl result.
+ * @return Concatenated Markdown with a metadata header.
+ */
+function formatCrawl(crawl: CrawlResult): string {
+  const header = [
+    '# Extracted documentation',
+    '',
+    `Root: ${crawl.root}`,
+    `Depth: ${crawl.depth} · Pages: ${crawl.pages.length} · ` +
+      `Errors: ${crawl.errors.length} · Truncated: ${crawl.truncated}`,
+    `Fetched: ${crawl.fetchedAt}`,
+  ].join('\n');
+  const sections = crawl.pages.map(
+    page =>
+      `## ${page.title || page.url}\n\n` +
+      `Source: ${page.url} · Depth: ${page.depth}\n\n${page.markdown}`,
+  );
+  const failures = crawl.errors.map(
+    entry => `- ${entry.url} (depth ${entry.depth}): ${entry.error}`,
+  );
+  return [
+    header,
+    ...sections,
+    ...(failures.length > 0 ? ['## Unreachable pages', '', ...failures] : []),
+  ].join('\n\n');
 }
 
 /**

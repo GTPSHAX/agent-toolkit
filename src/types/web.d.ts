@@ -80,8 +80,51 @@ export interface PageContent {
   readonly status: number;
   readonly title: string;
   readonly text: string;
+  readonly markdown: string;
   readonly contentType?: string;
   readonly bytes?: number;
+}
+
+/** Options accepted by {@link crawlDocumentation}. */
+export interface CrawlOptions {
+  /** Link-following depth; `1` reads only the entry page. */
+  readonly depth?: number;
+  /** Maximum pages to read across all depths. */
+  readonly maxPages?: number;
+  /** Restrict followed pages to the entry URL's origin. */
+  readonly sameOrigin?: boolean;
+  /** Maximum characters of Markdown per page. */
+  readonly maxLength?: number;
+  /** Request timeout per page in milliseconds. */
+  readonly timeoutMs?: number;
+  /** Skip the page cache. */
+  readonly noCache?: boolean;
+}
+
+/** One page read during a crawl. */
+export interface CrawlPage {
+  readonly url: string;
+  readonly depth: number;
+  readonly title: string;
+  readonly markdown: string;
+}
+
+/** A page that could not be read during a crawl. */
+export interface CrawlError {
+  readonly url: string;
+  readonly depth: number;
+  readonly error: string;
+}
+
+/** Result of crawling a documentation entry point. */
+export interface CrawlResult {
+  readonly root: string;
+  readonly depth: number;
+  readonly pages: readonly CrawlPage[];
+  readonly errors: readonly CrawlError[];
+  readonly visited: number;
+  readonly truncated: boolean;
+  readonly fetchedAt: string;
 }
 
 /** Result of reading a sitemap. */
