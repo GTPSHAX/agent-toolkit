@@ -135,6 +135,7 @@ and `command` as a single array:
 | `uuid` | Generates version 4 UUIDs or validates a UUID string. |
 | `web.search` | Searches the web via Google (headless browser, no API key) or DuckDuckGo. |
 | `web.fetch` | Fetches a page as Markdown; reads PDFs and sitemaps; crawls linked docs up to a depth. |
+| `web.request` | Performs a generic HTTP request and returns status, headers, and a JSON or text body. |
 | `web.suggest` | Returns Google autocomplete suggestions; no API key. |
 | `web.summary` | Searches and returns readable excerpts from top results. |
 | `web.batch` | Runs several search queries in one call. |
