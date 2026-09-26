@@ -27,7 +27,9 @@
     "agent-toolkit": "./dist/cli.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
     "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
@@ -36,11 +38,31 @@
     "test:watch": "vitest",
     "lint": "gts lint",
     "fix": "gts fix",
+    "docs": "doxygen Doxyfile",
     "prepublishOnly": "npm run clean && npm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "agent",
+    "ai",
+    "mcp",
+    "model-context-protocol",
+    "tools",
+    "cli",
+    "typescript"
+  ],
+  "author": "Rafie Hasannudin <rafiehasannudin@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GTPSHAX/agent-toolkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GTPSHAX/agent-toolkit/issues"
+  },
+  "homepage": "https://github.com/GTPSHAX/agent-toolkit#readme",
+  "engines": {
+    "node": ">=18"
+  },
   "devDependencies": {
     "@types/node": "^26.6.2",
     "gts": "^7.0.0",
@@ -49,3 +71,4 @@
     "vitest": "^5.0.2"
   }
 }
+

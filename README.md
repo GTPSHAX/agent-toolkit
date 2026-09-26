@@ -1,5 +1,9 @@
 # agent-toolkit
 
+[![CI](https://github.com/GTPSHAX/agent-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/GTPSHAX/agent-toolkit/actions/workflows/ci.yml)
+[![Docs](https://github.com/GTPSHAX/agent-toolkit/actions/workflows/docs.yml/badge.svg)](https://github.com/GTPSHAX/agent-toolkit/actions/workflows/docs.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 A standalone, zero-dependency TypeScript toolkit of tools that AI agents can
 call. Every tool follows the Model Context Protocol (MCP) result shape, and the
 same set of tools is exposed through two interfaces: a command-line interface
@@ -173,8 +177,23 @@ npm test            # run the test suite (vitest)
 npm run test:watch  # watch mode
 npm run lint        # lint and format check (gts)
 npm run fix         # apply lint and formatting fixes
+npm run docs        # generate API docs with Doxygen (needs doxygen)
 npm run clean       # remove dist/
 ```
+
+### Documentation
+
+API documentation is generated with Doxygen:
+
+```sh
+npm run docs        # writes HTML to docs/api/html
+```
+
+The generated site is published to GitHub Pages by the `Docs` workflow on every
+push to `main`. Because Doxygen has no dedicated TypeScript parser,
+`Doxyfile` maps `.ts` to the JavaScript parser and pipes each file through
+`scripts/doxygen-filter.mjs`, which strips TypeScript-only syntax while keeping
+the comment blocks.
 
 ### Project layout
 
@@ -188,7 +207,7 @@ src/
 ├── tools/              # one module per tool family, plus registry and executor
 └── utils/              # pure helpers used by the tools
 tests/                  # vitest suites
-scripts/copy-types.mjs  # copies hand-written .d.ts into dist/
+scripts/                # build helpers and the Doxygen input filter
 ```
 
 Public types live in `src/types/*.d.ts`; implementation files use `.ts`. The
@@ -203,4 +222,4 @@ identifiers are written in English.
 
 ## License
 
-ISC
+MIT. See [LICENSE](LICENSE).
