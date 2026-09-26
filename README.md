@@ -134,6 +134,7 @@ and `command` as a single array:
 | `morse` | Encodes text as Morse code or decodes Morse code. |
 | `jwt` | Decodes a JSON Web Token header and payload without verifying the signature. |
 | `uuid` | Generates version 4 UUIDs or validates a UUID string. |
+| `path` | Joins, resolves, normalizes, compares, and parses POSIX or Windows paths. |
 | `web.search` | Searches the web via Google (headless browser, no API key) or DuckDuckGo. |
 | `web.fetch` | Fetches a page as Markdown; reads PDFs and sitemaps; crawls linked docs up to a depth. |
 | `web.request` | Performs a generic HTTP request and returns status, headers, and a JSON or text body. |
