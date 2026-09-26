@@ -35,6 +35,12 @@ export {
   parseDuration,
   parseTime,
 } from './time.js';
+  DEFAULT_FILE_MAX_LENGTH,
+  codecFile,
+  hashFile,
+  readFileBytes,
+  resolveFilePath,
+} from './file.js';
 export {
   CRYPTO_HASH_ALGORITHMS,
   cryptoHash,

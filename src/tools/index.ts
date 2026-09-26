@@ -20,6 +20,14 @@ export {JSON_FORMAT_TOOL_NAME, jsonFormatTool} from './json-format.js';
 export {JSON_QUERY_TOOL_NAME, jsonQueryTool} from './json-query.js';
 export {REGEX_TOOL_NAME, regexTool} from './regex.js';
 export {TIME_TOOL_NAME, timeTool} from './time.js';
+export {
+  BASE64_FILE_TOOL_NAME,
+  HASH_FILE_TOOL_NAME,
+  HEX_FILE_TOOL_NAME,
+  base64FileTool,
+  hashFileTool,
+  hexFileTool,
+} from './file.js';
 export {DEFAULT_HASH_ALGORITHM, HASH_TOOL_NAME, hashTool} from './hash.js';
 export {BASE64_TOOL_NAME, base64Tool} from './base64.js';
 export {
