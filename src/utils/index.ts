@@ -25,6 +25,7 @@ export {
   type JsonFormatResult,
 } from './json.js';
 export {parsePath, queryJson} from './json-query.js';
+export {DEFAULT_PATH_PLATFORM, parsePathParts, pathApi} from './path.js';
 export {
   bumpVersion,
   compareVersions,

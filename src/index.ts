@@ -9,6 +9,7 @@ import {binaryTool, hexTool} from './tools/hex-binary.js';
 import {jsonFormatTool} from './tools/json-format.js';
 import {jsonQueryTool} from './tools/json-query.js';
 import {regexTool} from './tools/regex.js';
+import {pathTool} from './tools/path.js';
 import {semverTool} from './tools/semver.js';
 import {csvTool} from './tools/csv.js';
 import {timeTool} from './tools/time.js';
@@ -59,6 +60,7 @@ export {
   JSON_QUERY_TOOL_NAME,
   MAX_UUID_COUNT,
   MORSE_TOOL_NAME,
+  PATH_TOOL_NAME,
   REGEX_TOOL_NAME,
   ROT13_TOOL_NAME,
   SEMVER_TOOL_NAME,
@@ -92,6 +94,7 @@ export {
   jwtTool,
   listTools,
   morseTool,
+  pathTool,
   regexTool,
   rot13Tool,
   semverTool,
@@ -131,6 +134,7 @@ export {
   DEFAULT_TIME_FORMAT,
   DEFAULT_TIME_LOCALE,
   DEFAULT_MAX_PAGES,
+  DEFAULT_PATH_PLATFORM,
   DEFAULT_REGEX_MAX_LENGTH,
   DEFAULT_REQUEST_MAX_LENGTH,
   extractLinks,
@@ -156,6 +160,8 @@ export {
   parseArgv,
   parseCsv,
   parsePath,
+  parsePathParts,
+  pathApi,
   parseRange,
   parseVersion,
   PROTON_HASH_ALGORITHMS,
@@ -221,6 +227,10 @@ export type {
   JwtParts,
   LogLevel,
   ProtonHashAlgorithm,
+  PathAction,
+  PathParts,
+  PathPlatform,
+  PathResult,
   RegexMatch,
   RegexMode,
   RegexResult,
@@ -260,6 +270,7 @@ export function defaultTools(): ToolDefinition[] {
     jsonFormatTool(),
     jsonQueryTool(),
     regexTool(),
+    pathTool(),
     semverTool(),
     csvTool(),
     timeTool(),
