@@ -44,5 +44,13 @@ On npmjs.com, add a trusted publisher for `@gtpshax/agent-toolkit`:
   (`c5363f8`, PR #13) and `npm pkg fix` normalized the `bin` path.
 
 ## Not done
-- No tag pushed, so the OIDC publish workflow has not run yet.
-- Trusted publisher still needs to be configured on npmjs.com.
+- Streamable HTTP transport; additional tools.
+
+## Outcome
+- Trusted publisher configured; tag `v1.0.1` triggered the `Publish` workflow
+  (run 36208330289, success, 23s).
+- `1.0.1` published via OIDC with a signed provenance statement
+  (sigstore logIndex 2963925333); `npm view ...@1.0.1 dist.attestations`
+  reports `provenance.predicateType = https://slsa.dev/provenance/v1`.
+- `latest` dist-tag briefly still pointed at `1.0.0`; registry propagation
+  settled a few minutes later.
