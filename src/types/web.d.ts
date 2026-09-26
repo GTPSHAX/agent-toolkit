@@ -2,8 +2,14 @@
  * @fileoverview Types for web search, fetch, and research tools.
  */
 
+import type {JsonValue} from './common.js';
+
 /** Search engine identifier. */
 export type SearchEngine = 'google' | 'duckduckgo' | 'google-api';
+
+/** HTTP method accepted by the generic request helper. */
+export type RequestMethod =
+  'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD' | 'OPTIONS';
 
 /** Google result tab. */
 export type SearchTab = 'web' | 'news' | 'images' | 'videos';
@@ -124,6 +130,37 @@ export interface CrawlResult {
   readonly errors: readonly CrawlError[];
   readonly visited: number;
   readonly truncated: boolean;
+  readonly fetchedAt: string;
+}
+
+/** Options accepted by {@link requestUrl}. */
+export interface RequestOptions {
+  /** HTTP method; defaults to `GET`. */
+  readonly method?: RequestMethod;
+  /** Request headers. */
+  readonly headers?: Readonly<Record<string, string>>;
+  /** Request body, sent as-is. */
+  readonly body?: string;
+  /** Request timeout in milliseconds. */
+  readonly timeoutMs?: number;
+  /** Follow redirects; defaults to `true`. */
+  readonly redirect?: boolean;
+  /** Skip the disk cache. */
+  readonly noCache?: boolean;
+}
+
+/** A generic HTTP response with its body rendered. */
+export interface RequestResult {
+  readonly url: string;
+  readonly status: number;
+  readonly statusText: string;
+  readonly ok: boolean;
+  readonly headers: Readonly<Record<string, string>>;
+  readonly contentType: string;
+  readonly bytes: number;
+  readonly json?: JsonValue;
+  readonly text?: string;
+  readonly error?: string;
   readonly fetchedAt: string;
 }
 

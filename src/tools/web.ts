@@ -6,6 +6,8 @@ import type {JsonValue} from '../types/common.js';
 import type {
   CrawlResult,
   FreshnessWindow,
+  RequestMethod,
+  RequestResult,
   SearchEngine,
   SearchResult,
   SearchTab,
@@ -14,6 +16,7 @@ import type {ToolDefinition, ToolOutput} from '../types/tools.js';
 import type {JsonSchema} from '../types/tools.js';
 import {crawlSitemap, fetchDocument} from '../utils/web-fetch.js';
 import {crawlDocumentation} from '../utils/web-crawl.js';
+import {REQUEST_METHODS, requestUrl} from '../utils/web-request.js';
 import {
   isFreshnessWindow,
   isSearchEngine,
@@ -35,6 +38,8 @@ import {failure, success} from './executor.js';
 export const WEB_SEARCH_TOOL_NAME = 'web.search';
 /** Fetch tool name. */
 export const WEB_FETCH_TOOL_NAME = 'web.fetch';
+/** Generic request tool name. */
+export const WEB_REQUEST_TOOL_NAME = 'web.request';
 /** Suggest tool name. */
 export const WEB_SUGGEST_TOOL_NAME = 'web.suggest';
 /** Summary tool name. */
@@ -67,6 +72,27 @@ const SEARCH_RESULT_SCHEMA: JsonSchema = {
     sourceEngine: {type: 'string'},
   },
   required: ['title', 'url'],
+};
+
+/**
+ * @brief Output schema of the `web.request` tool.
+ */
+const REQUEST_OUTPUT_SCHEMA: JsonSchema = {
+  type: 'object',
+  properties: {
+    url: {type: 'string'},
+    status: {type: 'number'},
+    statusText: {type: 'string'},
+    ok: {type: 'boolean'},
+    headers: {type: 'object'},
+    contentType: {type: 'string'},
+    bytes: {type: 'number'},
+    json: {type: 'object', additionalProperties: true},
+    text: {type: 'string'},
+    error: {type: 'string'},
+    fetchedAt: {type: 'string'},
+  },
+  required: ['url', 'status', 'ok'],
 };
 
 /**
@@ -193,6 +219,49 @@ export function webFetchTool(): ToolDefinition {
       required: ['url'],
     },
     handler: handleWebFetch,
+  };
+}
+
+/**
+ * @brief Creates the `web.request` tool.
+ *
+ * @return A tool definition that performs a generic HTTP request.
+ */
+export function webRequestTool(): ToolDefinition {
+  return {
+    name: WEB_REQUEST_TOOL_NAME,
+    title: 'Web request',
+    description:
+      'Performs a generic HTTP request and returns status, headers, and ' +
+      'a JSON or text body.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        url: {type: 'string', description: 'Absolute http(s) URL.'},
+        method: {
+          type: 'string',
+          description: 'HTTP method; defaults to GET.',
+          enum: [...REQUEST_METHODS],
+        },
+        headers: {
+          type: 'object',
+          description: 'Request headers as a string map.',
+        },
+        body: {type: 'string', description: 'Request body, sent as-is.'},
+        maxLength: {
+          type: 'number',
+          description: 'Maximum body characters to return.',
+        },
+        redirect: {
+          type: 'boolean',
+          description: 'Follow redirects; defaults to true.',
+        },
+        noCache: {type: 'boolean', description: 'Skip the disk cache.'},
+      },
+      required: ['url'],
+    },
+    outputSchema: REQUEST_OUTPUT_SCHEMA,
+    handler: handleWebRequest,
   };
 }
 
@@ -441,6 +510,41 @@ async function handleWebFetch(args: JsonValue): Promise<ToolOutput> {
 }
 
 /**
+ * @brief Handles a `web.request` invocation.
+ *
+ * @param args Arguments carrying the URL, method, headers, and body.
+ * @return Response output, or an error output.
+ */
+async function handleWebRequest(args: JsonValue): Promise<ToolOutput> {
+  const url = readString(args, 'url');
+  if (url === undefined) {
+    return failure('web.request requires a "url" string argument');
+  }
+  const method = readString(args, 'method');
+  const headers = readStringMap(args, 'headers');
+  const body = readString(args, 'body');
+  const maxLength = readNumber(args, 'maxLength');
+  const redirect = readBoolean(args, 'redirect');
+  const noCache = readBoolean(args, 'noCache');
+  try {
+    const result = await requestUrl(
+      url,
+      {
+        ...(isRequestMethod(method) ? {method} : {}),
+        ...(headers === undefined ? {} : {headers}),
+        ...(body === undefined ? {} : {body}),
+        ...(redirect === undefined ? {} : {redirect}),
+        ...(noCache === undefined ? {} : {noCache}),
+      },
+      maxLength ?? undefined,
+    );
+    return success(formatResponse(result), toJson(result));
+  } catch (cause) {
+    return failure(`web.request: ${errorMessage(cause)}`);
+  }
+}
+
+/**
  * @brief Handles a `web.suggest` invocation.
  *
  * @param args Arguments carrying the query.
@@ -670,6 +774,62 @@ function formatCrawl(crawl: CrawlResult): string {
     ...sections,
     ...(failures.length > 0 ? ['## Unreachable pages', '', ...failures] : []),
   ].join('\n\n');
+}
+
+/**
+ * @brief Reads a string-map field from tool arguments.
+ *
+ * @param args Argument value of unknown shape.
+ * @param key Field name.
+ * @return The string map when valid, otherwise `undefined`.
+ */
+function readStringMap(
+  args: JsonValue,
+  key: string,
+): Record<string, string> | undefined {
+  if (args === null || typeof args !== 'object' || Array.isArray(args)) {
+    return undefined;
+  }
+  const value = args[key];
+  if (value === null || typeof value !== 'object' || Array.isArray(value)) {
+    return undefined;
+  }
+  const entries = Object.entries(value);
+  if (!entries.every(([, item]) => typeof item === 'string')) {
+    return undefined;
+  }
+  return Object.fromEntries(entries) as Record<string, string>;
+}
+
+/**
+ * @brief Checks whether a value is a supported HTTP method.
+ *
+ * @param value Candidate method.
+ * @return True when `value` is one of {@link REQUEST_METHODS}.
+ */
+function isRequestMethod(value: string | undefined): value is RequestMethod {
+  return (
+    value !== undefined && REQUEST_METHODS.includes(value as RequestMethod)
+  );
+}
+
+/**
+ * @brief Renders a generic response as readable text.
+ *
+ * @param result Request result.
+ * @return A status header followed by the JSON or text body.
+ */
+function formatResponse(result: RequestResult): string {
+  const header = [
+    `HTTP ${result.status} ${result.statusText}`.trim(),
+    `${result.contentType || 'unknown content-type'} · ${result.bytes} bytes`,
+    result.url,
+  ].join('\n');
+  const body =
+    result.json !== undefined
+      ? JSON.stringify(result.json, null, 2)
+      : (result.text ?? '');
+  return body.length > 0 ? `${header}\n\n${body}` : header;
 }
 
 /**
