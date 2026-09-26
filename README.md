@@ -1,5 +1,6 @@
 # agent-toolkit
 
+[![npm](https://img.shields.io/npm/v/@gtpshax/agent-toolkit.svg)](https://www.npmjs.com/package/@gtpshax/agent-toolkit)
 [![CI](https://github.com/GTPSHAX/agent-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/GTPSHAX/agent-toolkit/actions/workflows/ci.yml)
 [![Docs](https://github.com/GTPSHAX/agent-toolkit/actions/workflows/docs.yml/badge.svg)](https://github.com/GTPSHAX/agent-toolkit/actions/workflows/docs.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -14,18 +15,28 @@ and a local MCP server over stdio.
 - **Interfaces:** CLI and MCP stdio server
 - **Tools:** 20
 
+## Install
+
+```sh
+npm install -g @gtpshax/agent-toolkit   # global CLI
+npm install @gtpshax/agent-toolkit      # library
+```
+
 ## Quick start
+
+```sh
+npx @gtpshax/agent-toolkit list
+npx @gtpshax/agent-toolkit describe hash
+npx @gtpshax/agent-toolkit run hash '{"text":"abc"}'
+```
+
+From a checkout, build first and use the local CLI:
 
 ```sh
 npm install
 npm run build
-
 node dist/cli.js list
-node dist/cli.js describe hash
-node dist/cli.js run hash '{"text":"abc"}'
 ```
-
-After `npm link` (or install), the `agent-toolkit` binary is available directly.
 
 ## Interfaces
 
@@ -159,15 +170,15 @@ import {
   defaultTools,
   createRegistry,
   executeTool,
-} from 'agent-toolkit';
+} from '@gtpshax/agent-toolkit';
 
 const registry = createRegistry(defaultTools());
 const result = await executeTool(registry, 'hash', {text: 'abc'});
 console.log(result.structuredContent);
 ```
 
-Subpath exports are available for `agent-toolkit/tools`, `agent-toolkit/utils`,
-and `agent-toolkit/types`.
+Subpath exports are available for `@gtpshax/agent-toolkit/tools`,
+`@gtpshax/agent-toolkit/utils`, and `@gtpshax/agent-toolkit/types`.
 
 ## Development
 
@@ -219,6 +230,20 @@ files, since `tsc` does not emit them.
 Code follows the Google TypeScript Style, enforced by `gts`. Comments use
 Doxygen/JSDoc blocks (`@brief`, `@param`, `@return`). Code, comments, and
 identifiers are written in English.
+
+### Releasing
+
+Packages are published to npm by the `Publish` workflow when a `v*` tag is
+pushed, using npm trusted publishing (OIDC) with no stored token and with
+provenance.
+
+```sh
+npm version patch   # or minor / major
+git push --follow-tags
+```
+
+The workflow requires the trusted publisher configured on npmjs.com for this
+repository with the workflow filename `publish.yml`.
 
 ## License
 
