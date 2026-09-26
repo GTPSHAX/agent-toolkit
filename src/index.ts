@@ -9,6 +9,7 @@ import {binaryTool, hexTool} from './tools/hex-binary.js';
 import {jsonFormatTool} from './tools/json-format.js';
 import {jsonQueryTool} from './tools/json-query.js';
 import {regexTool} from './tools/regex.js';
+import {semverTool} from './tools/semver.js';
 import {jwtTool} from './tools/jwt.js';
 import {morseTool, rot13Tool} from './tools/rot13-morse.js';
 import {textStatsTool} from './tools/text-stats.js';
@@ -53,6 +54,7 @@ export {
   MORSE_TOOL_NAME,
   REGEX_TOOL_NAME,
   ROT13_TOOL_NAME,
+  SEMVER_TOOL_NAME,
   URL_TOOL_NAME,
   UUID_TOOL_NAME,
   WEB_BATCH_TOOL_NAME,
@@ -80,6 +82,7 @@ export {
   morseTool,
   regexTool,
   rot13Tool,
+  semverTool,
   success,
   textStatsTool,
   urlTool,
@@ -133,6 +136,8 @@ export {
   NIL_UUID,
   parseArgv,
   parsePath,
+  parseRange,
+  parseVersion,
   PROTON_HASH_ALGORITHMS,
   PROTON_HASH_SEED,
   protonHash,
@@ -144,16 +149,20 @@ export {
   repeatChar,
   requestUrl,
   rot13,
+  satisfiesRange,
   SUPPORTED_FLAGS,
   truncate,
   urlDecode,
   urlEncode,
   validateUuid,
   applyRegex,
+  bumpVersion,
+  compareVersions,
   type HtmlToMarkdownOptions,
   type JsonFormatResult,
   type ParsedArgv,
   type RegexOptions,
+  type SemverRelease,
 } from './utils/index.js';
 export type {
   CodecMode,
@@ -183,6 +192,9 @@ export type {
   RequestOptions,
   RequestResult,
   SearchResult,
+  SemVer,
+  SemverAction,
+  SemverResult,
   TextContent,
   TextStats,
   ToolkitConfig,
@@ -208,6 +220,7 @@ export function defaultTools(): ToolDefinition[] {
     jsonFormatTool(),
     jsonQueryTool(),
     regexTool(),
+    semverTool(),
     hashTool(),
     base64Tool(),
     hexTool(),

@@ -26,6 +26,14 @@ export {
 } from './json.js';
 export {parsePath, queryJson} from './json-query.js';
 export {
+  bumpVersion,
+  compareVersions,
+  parseRange,
+  parseVersion,
+  satisfiesRange,
+  type SemverRelease,
+} from './semver.js';
+export {
   CRYPTO_HASH_ALGORITHMS,
   cryptoHash,
   HASH_ALGORITHMS,
