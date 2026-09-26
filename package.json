@@ -1,6 +1,6 @@
 {
   "name": "@gtpshax/agent-toolkit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Standalone TypeScript toolkit of agent-callable tools with MCP-compatible output.",
   "type": "module",
   "main": "./dist/index.js",
