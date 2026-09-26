@@ -11,6 +11,12 @@ export {
   type ParsedArgv,
 } from './text.js';
 export {computeTextStats} from './text-stats.js';
+export {
+  DEFAULT_REGEX_MAX_LENGTH,
+  SUPPORTED_FLAGS,
+  applyRegex,
+  type RegexOptions,
+} from './regex.js';
 export {exampleFromSchema, formatToolSpec} from './tool-spec.js';
 export {
   DEFAULT_INDENT,

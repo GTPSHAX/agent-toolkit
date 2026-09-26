@@ -122,6 +122,7 @@ and `command` as a single array:
 | `echo` | Returns the provided arguments unchanged. |
 | `text.stats` | Counts characters, words, lines, sentences, and unique words. |
 | `json.format` | Parses and pretty-prints or compacts a JSON document. |
+| `regex` | Tests, extracts, replaces, or splits with a regular expression. |
 | `hash` | Hashes text with MD5, SHA-1, SHA-256, SHA-512, or ProtonHash. |
 | `base64` | Encodes or decodes Base64 text. |
 | `hex` | Encodes or decodes hexadecimal text. |
