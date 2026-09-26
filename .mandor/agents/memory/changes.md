@@ -24,4 +24,7 @@
 - 2026-09-25 — Add project README (branch `docs/readme`). Merged via PR #9.
 - 2026-09-26 — Add MIT license, package metadata, CI, and Doxygen docs
   (branches `chore/license-ci-docs`, `fix/docs-workflow`).
-  Record: `record-changes/2026-09-26-license-ci-docs.md`.
+  Record: `record-changes/2026-09-26-license-ci-docs.md`. Merged via PR #10, #11.
+- 2026-09-26 — Publish to npm via trusted publishing; package renamed to
+  `@gtpshax/agent-toolkit` (branch `feat/npm-publish`).
+  Record: `record-changes/2026-09-26-npm-publish.md`.

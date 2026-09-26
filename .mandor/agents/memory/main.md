@@ -1,9 +1,8 @@
 # main.md — agent-toolkit
 
 ## Status (2026-09-26)
-Project jalan dan publik. `main` memuat semua fitur (PR #1-#10): 20 tool, CLI,
-MCP stdio, README, lisensi MIT, CI, dan workflow docs Doxygen. Perbaikan docs
-workflow dikerjakan di branch `fix/docs-workflow` (belum di-merge).
+Project jalan dan publik. `main` memuat semua fitur (PR #1-#11). Publish npm
+dikerjakan di branch `feat/npm-publish` (belum di-merge).
 
 ## Stack
 - Bahasa: TypeScript `^6.0.3` (strict, `module: nodenext`, `target: esnext`, ESM `"type": "module"`)
@@ -25,6 +24,7 @@ workflow dikerjakan di branch `fix/docs-workflow` (belum di-merge).
 - `Doxyfile` — konfigurasi Doxygen (README sebagai main page)
 - `.github/workflows/ci.yml` — lint/build/test (Node 22, 24)
 - `.github/workflows/docs.yml` — build Doxygen + deploy GitHub Pages
+- `.github/workflows/publish.yml` — publish npm via OIDC (trigger tag `v*`)
 - `LICENSE` — MIT
 - `dist/` — output build (di-gitignore)
 - `docs/api/` — output Doxygen (di-gitignore)
@@ -32,8 +32,11 @@ workflow dikerjakan di branch `fix/docs-workflow` (belum di-merge).
 
 ## Git
 - Remote `origin`: https://github.com/GTPSHAX/agent-toolkit.git (public)
-- `main` memuat semua fitur (PR #1-#10).
+- `main` memuat semua fitur (PR #1-#11).
+- Nama package npm: `@gtpshax/agent-toolkit` (unscoped `agent-toolkit` sudah dipakai orang lain).
 - GitHub Pages aktif (`build_type: workflow`): https://gtpshax.github.io/agent-toolkit/
+- Publish npm pakai trusted publishing (OIDC), tanpa token; setup di npmjs.com
+  dengan workflow filename `publish.yml`.
 - Tool terdaftar di `defaultTools`: 20.
 - Web: default engine `google` via headless Chrome/Edge (tanpa API key);
   `google-api` opsional (butuh `GOOGLE_API_KEY` + `GOOGLE_CX`).
@@ -46,7 +49,7 @@ workflow dikerjakan di branch `fix/docs-workflow` (belum di-merge).
 - `.gitignore` — `node_modules/`, `dist/`, `docs/api/`
 - `.gitattributes` — `* text=auto eol=lf` (jaga EOL LF di checkout; dengan
   `core.autocrlf=true` tanpa ini, Prettier gagal tiap checkpoint)
-- `package.json` `license`: MIT; `engines`: Node >= 18
+- `package.json` `license`: MIT; `engines`: Node >= 18; name `@gtpshax/agent-toolkit`
 
 ## Perintah
 - `npm run build` — `tsc -p tsconfig.build.json` + copy types
