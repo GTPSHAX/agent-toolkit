@@ -34,6 +34,30 @@ export {
   type SemverRelease,
 } from './semver.js';
 export {
+  DEFAULT_DELIMITER,
+  DEFAULT_EOL,
+  TAB_DELIMITER,
+  parseCsv,
+  stringifyCsv,
+} from './csv.js';
+export {
+  DEFAULT_TIME_FORMAT,
+  DEFAULT_TIME_LOCALE,
+  addTime,
+  describeTime,
+  diffTime,
+  formatTime,
+  parseDuration,
+  parseTime,
+} from './time.js';
+export {
+  DEFAULT_FILE_MAX_LENGTH,
+  codecFile,
+  hashFile,
+  readFileBytes,
+  resolveFilePath,
+} from './file.js';
+export {
   CRYPTO_HASH_ALGORITHMS,
   cryptoHash,
   HASH_ALGORITHMS,
