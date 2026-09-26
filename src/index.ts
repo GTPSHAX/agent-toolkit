@@ -7,6 +7,7 @@ import {echoTool} from './tools/executor.js';
 import {hashTool} from './tools/hash.js';
 import {binaryTool, hexTool} from './tools/hex-binary.js';
 import {jsonFormatTool} from './tools/json-format.js';
+import {regexTool} from './tools/regex.js';
 import {jwtTool} from './tools/jwt.js';
 import {morseTool, rot13Tool} from './tools/rot13-morse.js';
 import {textStatsTool} from './tools/text-stats.js';
@@ -47,6 +48,7 @@ export {
   JWT_TOOL_NAME,
   MAX_UUID_COUNT,
   MORSE_TOOL_NAME,
+  REGEX_TOOL_NAME,
   ROT13_TOOL_NAME,
   URL_TOOL_NAME,
   UUID_TOOL_NAME,
@@ -71,6 +73,7 @@ export {
   jwtTool,
   listTools,
   morseTool,
+  regexTool,
   rot13Tool,
   success,
   textStatsTool,
@@ -101,6 +104,7 @@ export {
   DEFAULT_CRAWL_MAX_LENGTH,
   DEFAULT_INDENT,
   DEFAULT_MAX_PAGES,
+  DEFAULT_REGEX_MAX_LENGTH,
   extractLinks,
   formatJson,
   generateUuid,
@@ -129,13 +133,16 @@ export {
   readHtmlAttribute,
   repeatChar,
   rot13,
+  SUPPORTED_FLAGS,
   truncate,
   urlDecode,
   urlEncode,
   validateUuid,
+  applyRegex,
   type HtmlToMarkdownOptions,
   type JsonFormatResult,
   type ParsedArgv,
+  type RegexOptions,
 } from './utils/index.js';
 export type {
   CodecMode,
@@ -156,6 +163,9 @@ export type {
   JwtParts,
   LogLevel,
   ProtonHashAlgorithm,
+  RegexMatch,
+  RegexMode,
+  RegexResult,
   SearchResult,
   TextContent,
   TextStats,
@@ -180,6 +190,7 @@ export function defaultTools(): ToolDefinition[] {
     echoTool(),
     textStatsTool(),
     jsonFormatTool(),
+    regexTool(),
     hashTool(),
     base64Tool(),
     hexTool(),
