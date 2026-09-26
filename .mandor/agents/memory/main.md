@@ -34,7 +34,9 @@ dikerjakan di branch `feat/npm-publish` (belum di-merge).
 - Remote `origin`: https://github.com/GTPSHAX/agent-toolkit.git (public)
 - `main` memuat semua fitur (PR #1-#11).
 - Nama package npm: `@gtpshax/agent-toolkit` (unscoped `agent-toolkit` sudah dipakai orang lain).
-- Package terbit: `@gtpshax/agent-toolkit@1.0.0` (publish manual, 2FA).
+- Package terbit: `@gtpshax/agent-toolkit` (`1.0.0` manual, `1.0.1` via workflow OIDC + provenance).
+- Publish otomatis jalan: push tag `v*` → workflow `Publish` → OIDC, tanpa token, dengan provenance.
+- Rilis: `npm version patch && git push --follow-tags`.
 - GitHub Pages aktif (`build_type: workflow`): https://gtpshax.github.io/agent-toolkit/
 - Publish npm pakai trusted publishing (OIDC), tanpa token; setup di npmjs.com
   dengan workflow filename `publish.yml`.
