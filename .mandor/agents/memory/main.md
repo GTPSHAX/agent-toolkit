@@ -14,11 +14,11 @@ dikerjakan di branch `feat/npm-publish` (belum di-merge).
 - `src/index.ts` — entry library (re-export + `defaultTools()`)
 - `src/cli.ts` — entry CLI (bin `agent-toolkit`), `-h`/`list`/`describe`/`run`/`mcp`
 - `src/mcp.ts` — MCP stdio server (JSON-RPC 2.0)
-- `src/types/*.d.ts` — tipe publik terpusat (common, config, encoding, hash, json, text, tools, uuid, web, index)
+- `src/types/*.d.ts` — tipe publik terpusat (common, config, csv, encoding, file, hash, json, path, regex, semver, text, time, tools, uuid, web, index)
 - `src/core/` — `config.ts`, `logger.ts`, `errors.ts`
-- `src/tools/` — `registry.ts`, `executor.ts` (`echo`), `args.ts`, `text-stats.ts`, `json-format.ts`, `json-query.ts`, `regex.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `uuid.ts`, `web.ts` (8 tool `web.*`), `index.ts`
-- `src/utils/` — `text.ts`, `text-stats.ts`, `json.ts`, `json-query.ts`, `regex.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `uuid.ts`, `web-core.ts`, `web-engines.ts`, `web-fetch.ts`, `html-to-markdown.ts`, `web-crawl.ts`, `web-request.ts`, `web-search.ts`, `index.ts`
-- `tests/` — 16 file (vitest, 160 test)
+- `src/tools/` — `registry.ts`, `executor.ts` (`echo`), `args.ts`, `text-stats.ts`, `json-format.ts`, `json-query.ts`, `regex.ts`, `csv.ts`, `semver.ts`, `path.ts`, `time.ts`, `file.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `uuid.ts`, `web.ts` (8 tool `web.*`), `index.ts`
+- `src/utils/` — `text.ts`, `text-stats.ts`, `json.ts`, `json-query.ts`, `regex.ts`, `csv.ts`, `semver.ts`, `path.ts`, `time.ts`, `file.ts`, `hash.ts`, `base64.ts`, `hex-binary.ts`, `url-html.ts`, `rot13-morse.ts`, `jwt.ts`, `uuid.ts`, `web-core.ts`, `web-engines.ts`, `web-fetch.ts`, `html-to-markdown.ts`, `web-crawl.ts`, `web-request.ts`, `web-search.ts`, `index.ts`
+- `tests/` — 23 file (vitest, 219 test)
 - `scripts/copy-types.mjs` — copy `src/types` → `dist/types`
 - `scripts/doxygen-filter.mjs` — filter TypeScript→JS untuk Doxygen
 - `Doxyfile` — konfigurasi Doxygen (README sebagai main page)
@@ -34,13 +34,13 @@ dikerjakan di branch `feat/npm-publish` (belum di-merge).
 - Remote `origin`: https://github.com/GTPSHAX/agent-toolkit.git (public)
 - `main` memuat semua fitur (PR #1-#11).
 - Nama package npm: `@gtpshax/agent-toolkit` (unscoped `agent-toolkit` sudah dipakai orang lain).
-- Package terbit: `@gtpshax/agent-toolkit` (`1.0.0` manual, `1.0.1` via workflow OIDC + provenance).
+- Package terbit: `@gtpshax/agent-toolkit` (`1.0.0` manual, `1.0.1` dan `1.1.0` via workflow OIDC + provenance).
 - Publish otomatis jalan: push tag `v*` → workflow `Publish` → OIDC, tanpa token, dengan provenance.
 - Rilis: `npm version patch && git push --follow-tags`.
 - GitHub Pages aktif (`build_type: workflow`): https://gtpshax.github.io/agent-toolkit/
 - Publish npm pakai trusted publishing (OIDC), tanpa token; setup di npmjs.com
   dengan workflow filename `publish.yml`.
-- Tool terdaftar di `defaultTools`: 23.
+- Tool terdaftar di `defaultTools`: 30.
 - Web: default engine `google` via headless Chrome/Edge (tanpa API key);
   `google-api` opsional (butuh `GOOGLE_API_KEY` + `GOOGLE_CX`).
 

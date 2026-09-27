@@ -41,5 +41,8 @@
   `feat/time-tool`, `feat/csv-tool`, `feat/semver-tool`, `feat/path-tool`,
   `feat/web-fetch-format`).
   Record: `record-changes/2026-09-26-tools-batch-2.md`.
-  PRs #21, #22, #23, #24, #25, #26 open.
-  PRs #17, #18, #19 open.
+  Merged via PR #21, #22, #23, #24, #25, #26.
+- 2026-09-26 — Release 1.1.0 to npm: version bump (branch
+  `chore/release-1.1.0`, PR #28), tag `v1.1.0`, GitHub release, publish via
+  OIDC workflow with provenance; `latest = 1.1.0`.
+  Record: `record-changes/2026-09-26-release-1-1-0.md`.
